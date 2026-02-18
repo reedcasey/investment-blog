@@ -729,7 +729,6 @@
       { ticker: '^GSPC', label: 'S&P 500' },
       { ticker: '^IXIC', label: 'Nasdaq' },
       { ticker: '^TNX',  label: '10Y Treasury' },
-      { ticker: '^VIX',  label: 'VIX' },
       { ticker: 'GC=F',  label: 'Gold' },
     ];
 
@@ -814,7 +813,7 @@
               <div class="holding-change ${cls(q.change)}">${fmtChange(q.change)}</div>
             </div>
           </div>`;
-      }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString()}</div>`;
+      }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</div>`;
     }
 
     function renderWatchlist(quotes) {
@@ -826,7 +825,7 @@
             <span class="watch-price">${fmtPrice(q.price)}</span>
             <div class="watch-change ${cls(q.change)}">${fmtChange(q.change)}</div>
           </div>
-        </div>`).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString()}</div>`;
+        </div>`).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</div>`;
     }
 
     function renderMarketPulse(quotes) {
@@ -846,7 +845,7 @@
               <span class="pulse-change ${cls(q.change)}">${fmtChange(q.change)}</span>
             </div>
           </div>`;
-      }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString()}</div>`;
+      }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</div>`;
     }
 
     function showError(containerId, msg) {
@@ -885,4 +884,5 @@
 
 </body>
 </html>
+
 
