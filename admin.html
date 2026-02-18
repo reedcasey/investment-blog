@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Blank] — Write</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --text: #1a1a1a;
+      --text-light: #6b6b6b;
+      --bg: #fafafa;
+      --card-bg: #ffffff;
+      --border: #e8e8e8;
+      --accent: #2c2c2c;
+      --green: #16a34a;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --max-width: 900px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 250, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Lora', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* LAYOUT */
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+    }
+    .page-header {
+      margin-bottom: 2rem;
+    }
+    .page-header h1 {
+      font-family: 'Lora', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .page-header p {
+      color: var(--text-light);
+      font-size: 0.92rem;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .tab {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-light);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: inherit;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* EDITOR */
+    .editor-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .field { margin-bottom: 1.25rem; }
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-light);
+      margin-bottom: 0.4rem;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border 0.2s;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus { border-color: var(--accent); background: #fff; }
+    .field textarea {
+      min-height: 300px;
+      resize: vertical;
+      line-height: 1.8;
+    }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* TOOLBAR */
+    .toolbar {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .toolbar button {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-light);
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .toolbar button:hover { background: var(--border); color: var(--text); }
+
+    /* ACTIONS */
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      align-items: center;
+    }
+    .btn {
+      padding: 0.7rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.8; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: var(--border); color: var(--text); }
+    .btn-danger { background: transparent; color: var(--red); border: 1px solid var(--red); }
+    .status-msg {
+      font-size: 0.82rem;
+      color: var(--green);
+      margin-left: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .status-msg.show { opacity: 1; }
+
+    /* POSTS LIST */
+    .posts-list { list-style: none; }
+    .post-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      background: var(--card-bg);
+      transition: box-shadow 0.15s;
+    }
+    .post-row:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .post-row-left { flex: 1; min-width: 0; }
+    .post-row-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .post-row-meta {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 0.15rem;
+    }
+    .post-row-actions { display: flex; gap: 0.5rem; flex-shrink: 0; margin-left: 1rem; }
+    .post-row-actions button {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .post-row-actions button:hover { background: var(--border); }
+    .post-row-actions .delete-btn { color: var(--red); border-color: var(--red); }
+    .post-row-actions .delete-btn:hover { background: #fef2f2; }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-light);
+      font-size: 0.92rem;
+    }
+    .post-count {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    /* PREVIEW */
+    .preview-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5rem;
+    }
+    .preview-card .preview-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      background: var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      margin-bottom: 0.75rem;
+    }
+    .preview-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .preview-card .preview-date {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    .preview-card .preview-body {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #333;
+    }
+    .preview-card .preview-body p { margin-bottom: 1rem; }
+    .preview-card .preview-body h2, .preview-card .preview-body h3 {
+      font-family: 'Lora', serif;
+      margin: 1.5rem 0 0.75rem;
+    }
+    .preview-card .preview-body strong { font-weight: 600; }
+    .preview-card .preview-body em { font-style: italic; }
+    .preview-card .preview-body blockquote {
+      border-left: 3px solid var(--border);
+      padding-left: 1rem;
+      margin: 1rem 0;
+      color: var(--text-light);
+      font-style: italic;
+    }
+    .preview-empty {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-light);
+      font-size: 0.92rem;
+    }
+
+    /* DEPLOY TAB */
+    .deploy-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 1.25rem;
+    }
+    .deploy-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .deploy-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .deploy-card .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+    }
+    .deploy-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .deploy-steps li {
+      display: flex;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .deploy-steps li span { padding-top: 2px; }
+    .import-area {
+      margin-top: 1rem;
+    }
+    .import-area textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      resize: vertical;
+      margin-bottom: 0.75rem;
+    }
+
+    @media (max-width: 640px) {
+      .field-row { grid-template-columns: 1fr; }
+      .post-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .post-row-actions { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">[Blank] <span class="nav-badge">Admin</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">View Blog</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <h1>Your Posts</h1>
+      <p>Write, edit, and manage your investment blog from here.</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" data-tab="write">Write</button>
+      <button class="tab" data-tab="manage">Manage Posts</button>
+      <button class="tab" data-tab="preview">Preview</button>
+      <button class="tab" data-tab="deploy">Deploy</button>
+    </div>
+
+    <!-- WRITE TAB -->
+    <div class="tab-panel active" id="tab-write">
+      <div class="editor-card">
+        <div class="field">
+          <label for="post-title">Title</label>
+          <input type="text" id="post-title" placeholder="e.g. Why I'm Bullish on Healthcare AI" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="post-tag">Tag</label>
+            <select id="post-tag">
+              <option value="Strategy">Strategy</option>
+              <option value="Macro">Macro</option>
+              <option value="Thesis">Thesis</option>
+              <option value="Outlook">Outlook</option>
+              <option value="Portfolio">Portfolio</option>
+              <option value="Analysis">Analysis</option>
+              <option value="Commentary">Commentary</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="post-excerpt">Excerpt (short summary)</label>
+            <input type="text" id="post-excerpt" placeholder="A one-liner that shows on the blog feed" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Body</label>
+          <div class="toolbar">
+            <button onclick="insertMarkdown('**', '**')" title="Bold"><b>B</b></button>
+            <button onclick="insertMarkdown('*', '*')" title="Italic"><i>I</i></button>
+            <button onclick="insertMarkdown('\n## ', '\n')" title="Heading">H2</button>
+            <button onclick="insertMarkdown('\n### ', '\n')" title="Sub-heading">H3</button>
+            <button onclick="insertMarkdown('\n> ', '\n')" title="Blockquote">"</button>
+            <button onclick="insertMarkdown('\n- ', '\n')" title="List">List</button>
+            <button onclick="insertMarkdown('\n---\n', '')" title="Divider">—</button>
+          </div>
+          <textarea id="post-body" placeholder="Write your post here. You can use simple Markdown:&#10;&#10;**bold text**&#10;*italic text*&#10;## Heading&#10;> Blockquote&#10;- List item"></textarea>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="publishPost()">Publish</button>
+          <button class="btn btn-secondary" onclick="saveDraft()">Save Draft</button>
+          <span class="status-msg" id="status-msg"></span>
+        </div>
+        <input type="hidden" id="editing-id" value="" />
+      </div>
+    </div>
+
+    <!-- MANAGE TAB -->
+    <div class="tab-panel" id="tab-manage">
+      <div class="post-count" id="post-count"></div>
+      <ul class="posts-list" id="posts-list"></ul>
+    </div>
+
+    <!-- PREVIEW TAB -->
+    <div class="tab-panel" id="tab-preview">
+      <div id="preview-content"></div>
+    </div>
+
+    <!-- DEPLOY TAB -->
+    <div class="tab-panel" id="tab-deploy">
+      <div class="deploy-card">
+        <h3>Export Posts for Deployment</h3>
+        <p>Download your published posts as a <code>posts.json</code> file. Replace the existing one in your site folder, then push to GitHub to update your live site.</p>
+        <ol class="deploy-steps">
+          <li><span class="step-num">1</span><span>Click <strong>Export posts.json</strong> below to download your latest posts</span></li>
+          <li><span class="step-num">2</span><span>Replace the <code>posts.json</code> file in your site folder with the downloaded one</span></li>
+          <li><span class="step-num">3</span><span>Commit and push to GitHub — your site updates automatically</span></li>
+        </ol>
+        <div style="margin-top:1.25rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="exportPostsJson()">Export posts.json</button>
+          <button class="btn btn-secondary" onclick="exportAllBackup()">Export Full Backup</button>
+        </div>
+      </div>
+
+      <div class="deploy-card">
+        <h3>Import Posts</h3>
+        <p>Restore from a backup or import posts from another device. Paste your JSON below.</p>
+        <div class="import-area">
+          <textarea id="import-json" placeholder='Paste your posts JSON here...'></textarea>
+          <button class="btn btn-secondary" onclick="importPosts()">Import</button>
+          <span class="status-msg" id="import-status"></span>
+        </div>
+      </div>
+
+      <div class="deploy-card">
+        <h3>Hosting Quick Start</h3>
+        <p>Your site is ready for free hosting on GitHub Pages. Here's the setup:</p>
+        <ol class="deploy-steps">
+          <li><span class="step-num">1</span><span>Create a GitHub repository (e.g. <code>my-investment-blog</code>)</span></li>
+          <li><span class="step-num">2</span><span>Upload <code>index.html</code>, <code>admin.html</code>, and <code>posts.json</code> — rename <code>index.html</code> to <code>index.html</code></span></li>
+          <li><span class="step-num">3</span><span>Go to Settings → Pages → set source to <strong>main branch</strong></span></li>
+          <li><span class="step-num">4</span><span>Your site will be live at <code>username.github.io/repo-name</code></span></li>
+          <li><span class="step-num">5</span><span>To use a custom domain, add it in the Pages settings and update your DNS</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // STORAGE
+    // ==========================================
+    const STORAGE_KEY = 'blank_blog_posts';
+
+    function getPosts() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch { return []; }
+    }
+
+    function savePosts(posts) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    }
+
+    // ==========================================
+    // TABS
+    // ==========================================
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+
+        if (tab.dataset.tab === 'manage') renderPostsList();
+        if (tab.dataset.tab === 'preview') renderPreview();
+      });
+    });
+
+    // ==========================================
+    // MARKDOWN HELPERS
+    // ==========================================
+    function insertMarkdown(before, after) {
+      const ta = document.getElementById('post-body');
+      const start = ta.selectionStart;
+      const end = ta.selectionEnd;
+      const selected = ta.value.substring(start, end);
+      const replacement = before + (selected || 'text') + after;
+      ta.setRangeText(replacement, start, end, 'select');
+      ta.focus();
+    }
+
+    function markdownToHtml(md) {
+      let html = md
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        // headings
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        // hr
+        .replace(/^---$/gm, '<hr>')
+        // blockquote
+        .replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>')
+        // bold & italic
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        // list items
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        // paragraphs
+        .split('\n\n').map(block => {
+          block = block.trim();
+          if (!block) return '';
+          if (/^<[hblu]|^<li|^<hr/.test(block)) return block;
+          return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+        }).join('\n');
+
+      // wrap consecutive <li> in <ul>
+      html = html.replace(/(<li>.*?<\/li>\n?)+/g, '<ul>$&</ul>');
+      return html;
+    }
+
+    // ==========================================
+    // PUBLISH / SAVE
+    // ==========================================
+    function publishPost() {
+      const title = document.getElementById('post-title').value.trim();
+      const tag = document.getElementById('post-tag').value;
+      const excerpt = document.getElementById('post-excerpt').value.trim();
+      const body = document.getElementById('post-body').value.trim();
+      const editingId = document.getElementById('editing-id').value;
+
+      if (!title) { showStatus('Please add a title', true); return; }
+      if (!body) { showStatus('Please write some content', true); return; }
+
+      const posts = getPosts();
+      const now = new Date().toISOString();
+
+      if (editingId) {
+        // Update existing
+        const idx = posts.findIndex(p => p.id === editingId);
+        if (idx !== -1) {
+          posts[idx] = { ...posts[idx], title, tag, excerpt, body, status: 'published', updatedAt: now };
+        }
+        document.getElementById('editing-id').value = '';
+      } else {
+        // New post
+        posts.unshift({
+          id: 'post_' + Date.now(),
+          title,
+          tag,
+          excerpt: excerpt || body.substring(0, 140) + '...',
+          body,
+          status: 'published',
+          createdAt: now,
+          updatedAt: now,
+        });
+      }
+
+      savePosts(posts);
+      clearEditor();
+      showStatus('Published!');
+    }
+
+    function saveDraft() {
+      const title = document.getElementById('post-title').value.trim();
+      const tag = document.getElementById('post-tag').value;
+      const excerpt = document.getElementById('post-excerpt').value.trim();
+      const body = document.getElementById('post-body').value.trim();
+      const editingId = document.getElementById('editing-id').value;
+
+      if (!title && !body) { showStatus('Nothing to save', true); return; }
+
+      const posts = getPosts();
+      const now = new Date().toISOString();
+
+      if (editingId) {
+        const idx = posts.findIndex(p => p.id === editingId);
+        if (idx !== -1) {
+          posts[idx] = { ...posts[idx], title, tag, excerpt, body, updatedAt: now };
+        }
+      } else {
+        posts.unshift({
+          id: 'post_' + Date.now(),
+          title: title || 'Untitled Draft',
+          tag,
+          excerpt,
+          body,
+          status: 'draft',
+          createdAt: now,
+          updatedAt: now,
+        });
+      }
+
+      savePosts(posts);
+      showStatus('Draft saved');
+    }
+
+    function clearEditor() {
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-tag').selectedIndex = 0;
+      document.getElementById('post-excerpt').value = '';
+      document.getElementById('post-body').value = '';
+      document.getElementById('editing-id').value = '';
+    }
+
+    function showStatus(msg, isError) {
+      const el = document.getElementById('status-msg');
+      el.textContent = msg;
+      el.style.color = isError ? 'var(--red)' : 'var(--green)';
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2500);
+    }
+
+    // ==========================================
+    // MANAGE POSTS LIST
+    // ==========================================
+    function renderPostsList() {
+      const posts = getPosts();
+      const countEl = document.getElementById('post-count');
+      const listEl = document.getElementById('posts-list');
+
+      const published = posts.filter(p => p.status === 'published').length;
+      const drafts = posts.filter(p => p.status === 'draft').length;
+      countEl.textContent = `${published} published, ${drafts} draft${drafts !== 1 ? 's' : ''}`;
+
+      if (posts.length === 0) {
+        listEl.innerHTML = '<div class="empty-state">No posts yet. Go to the Write tab to create your first post.</div>';
+        return;
+      }
+
+      listEl.innerHTML = posts.map(p => {
+        const date = new Date(p.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const statusBadge = p.status === 'draft'
+          ? '<span style="color:var(--text-light);font-style:italic"> — Draft</span>'
+          : '';
+        return `
+          <li class="post-row">
+            <div class="post-row-left">
+              <div class="post-row-title">${p.title}${statusBadge}</div>
+              <div class="post-row-meta">${p.tag} · ${date}</div>
+            </div>
+            <div class="post-row-actions">
+              <button onclick="editPost('${p.id}')">Edit</button>
+              ${p.status === 'draft' ? `<button onclick="publishById('${p.id}')">Publish</button>` : `<button onclick="unpublishPost('${p.id}')">Unpublish</button>`}
+              <button class="delete-btn" onclick="deletePost('${p.id}')">Delete</button>
+            </div>
+          </li>`;
+      }).join('');
+    }
+
+    function editPost(id) {
+      const posts = getPosts();
+      const post = posts.find(p => p.id === id);
+      if (!post) return;
+
+      document.getElementById('post-title').value = post.title;
+      document.getElementById('post-tag').value = post.tag;
+      document.getElementById('post-excerpt').value = post.excerpt;
+      document.getElementById('post-body').value = post.body;
+      document.getElementById('editing-id').value = post.id;
+
+      // Switch to write tab
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelector('[data-tab="write"]').classList.add('active');
+      document.getElementById('tab-write').classList.add('active');
+
+      showStatus('Editing: ' + post.title);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function publishById(id) {
+      const posts = getPosts();
+      const idx = posts.findIndex(p => p.id === id);
+      if (idx !== -1) {
+        posts[idx].status = 'published';
+        posts[idx].updatedAt = new Date().toISOString();
+        savePosts(posts);
+        renderPostsList();
+      }
+    }
+
+    function unpublishPost(id) {
+      const posts = getPosts();
+      const idx = posts.findIndex(p => p.id === id);
+      if (idx !== -1) {
+        posts[idx].status = 'draft';
+        posts[idx].updatedAt = new Date().toISOString();
+        savePosts(posts);
+        renderPostsList();
+      }
+    }
+
+    function deletePost(id) {
+      if (!confirm('Delete this post? This cannot be undone.')) return;
+      const posts = getPosts().filter(p => p.id !== id);
+      savePosts(posts);
+      renderPostsList();
+    }
+
+    // ==========================================
+    // PREVIEW
+    // ==========================================
+    function renderPreview() {
+      const title = document.getElementById('post-title').value.trim();
+      const tag = document.getElementById('post-tag').value;
+      const body = document.getElementById('post-body').value.trim();
+      const container = document.getElementById('preview-content');
+
+      if (!title && !body) {
+        container.innerHTML = '<div class="preview-empty">Start writing in the Write tab to see a live preview here.</div>';
+        return;
+      }
+
+      const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      container.innerHTML = `
+        <div class="preview-card">
+          <span class="preview-tag">${tag}</span>
+          <h2>${title || 'Untitled'}</h2>
+          <div class="preview-date">${today}</div>
+          <div class="preview-body">${markdownToHtml(body)}</div>
+        </div>`;
+    }
+
+    // ==========================================
+    // DEPLOY — EXPORT / IMPORT
+    // ==========================================
+    function exportPostsJson() {
+      const posts = getPosts().filter(p => p.status === 'published');
+      const json = JSON.stringify(posts, null, 2);
+      downloadFile('posts.json', json, 'application/json');
+    }
+
+    function exportAllBackup() {
+      const posts = getPosts();
+      const json = JSON.stringify(posts, null, 2);
+      const date = new Date().toISOString().slice(0, 10);
+      downloadFile(`blog-backup-${date}.json`, json, 'application/json');
+    }
+
+    function downloadFile(filename, content, type) {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function importPosts() {
+      const raw = document.getElementById('import-json').value.trim();
+      const statusEl = document.getElementById('import-status');
+      if (!raw) {
+        statusEl.textContent = 'Paste JSON first';
+        statusEl.style.color = 'var(--red)';
+        statusEl.classList.add('show');
+        setTimeout(() => statusEl.classList.remove('show'), 2500);
+        return;
+      }
+      try {
+        const imported = JSON.parse(raw);
+        if (!Array.isArray(imported)) throw new Error('Not an array');
+        savePosts(imported);
+        statusEl.textContent = `Imported ${imported.length} post(s)!`;
+        statusEl.style.color = 'var(--green)';
+        statusEl.classList.add('show');
+        document.getElementById('import-json').value = '';
+        setTimeout(() => statusEl.classList.remove('show'), 3000);
+      } catch (e) {
+        statusEl.textContent = 'Invalid JSON — check the format';
+        statusEl.style.color = 'var(--red)';
+        statusEl.classList.add('show');
+        setTimeout(() => statusEl.classList.remove('show'), 3000);
+      }
+    }
+
+    // ==========================================
+    // INIT — seed from posts.json if localStorage is empty
+    // ==========================================
+    (async function init() {
+      const existing = getPosts();
+      if (existing.length === 0) {
+        try {
+          const res = await fetch('posts.json');
+          if (res.ok) {
+            const data = await res.json();
+            if (data.length > 0) {
+              savePosts(data);
+            }
+          }
+        } catch {}
+      }
+    })();
+  </script>
+
+</body>
+</html>
