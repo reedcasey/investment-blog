@@ -724,9 +724,6 @@
     const WATCHLIST = [
       { ticker: 'HON' },
       { ticker: 'SOLS' },
-      { ticker: 'NVDA' },
-      { ticker: 'GOOG' },
-      { ticker: 'META' },
     ];
     const INDICES = [
       { ticker: '^GSPC', label: 'S&P 500' },
@@ -739,13 +736,29 @@
     // ==========================================
     // FETCH HELPERS
     // ==========================================
+    // Primary: own Cloudflare Worker proxy
+    // Fallback: public CORS proxies
+    const WORKER_URLS = [
+      'https://api.allegoryofthetrade.com/?ticker=',
+      'https://stock-proxy.reedmcasey.workers.dev/?ticker=',
+    ];
+    const YF_BASE = 'https://query1.finance.yahoo.com/v8/finance/chart/';
     const PROXIES = [
       url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
       url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+      url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
     ];
-    const YF_BASE = 'https://query1.finance.yahoo.com/v8/finance/chart/';
 
     async function fetchQuote(ticker) {
+      for (const workerUrl of WORKER_URLS) {
+        try {
+          const res = await fetch(workerUrl + encodeURIComponent(ticker), { signal: AbortSignal.timeout(6000) });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.price !== undefined) return data;
+          }
+        } catch {}
+      }
       const yfUrl = `${YF_BASE}${encodeURIComponent(ticker)}?interval=1d&range=5d`;
       let lastError;
       for (const makeProxy of PROXIES) {
@@ -758,12 +771,7 @@
           const price = meta.regularMarketPrice;
           const prevClose = meta.chartPreviousClose || meta.previousClose;
           const change = ((price - prevClose) / prevClose) * 100;
-          return {
-            ticker: ticker,
-            price: price,
-            change: change,
-            shortName: meta.shortName || meta.symbol,
-          };
+          return { ticker, price, change, shortName: meta.shortName || meta.symbol };
         } catch (e) { lastError = e; }
       }
       throw lastError;
@@ -850,20 +858,24 @@
     // INIT
     // ==========================================
     async function loadAll() {
-      // Portfolio
-      Promise.all(PORTFOLIO.map(p => fetchQuote(p.ticker)))
-        .then(renderPortfolio)
-        .catch(() => showError('portfolio-holdings', 'Could not load portfolio data'));
-
-      // Watchlist
-      Promise.all(WATCHLIST.map(w => fetchQuote(w.ticker)))
-        .then(renderWatchlist)
-        .catch(() => showError('watchlist-holdings', 'Could not load watchlist data'));
-
-      // Market Pulse
-      Promise.all(INDICES.map(idx => fetchQuote(idx.ticker)))
-        .then(renderMarketPulse)
-        .catch(() => showError('market-pulse', 'Could not load market data'));
+      Promise.allSettled(PORTFOLIO.map(p => fetchQuote(p.ticker)))
+        .then(results => {
+          const quotes = results.filter(r => r.status === 'fulfilled').map(r => r.value);
+          if (quotes.length > 0) renderPortfolio(quotes);
+          else showError('portfolio-holdings', 'Could not load portfolio data');
+        });
+      Promise.allSettled(WATCHLIST.map(w => fetchQuote(w.ticker)))
+        .then(results => {
+          const quotes = results.filter(r => r.status === 'fulfilled').map(r => r.value);
+          if (quotes.length > 0) renderWatchlist(quotes);
+          else showError('watchlist-holdings', 'Could not load watchlist data');
+        });
+      Promise.allSettled(INDICES.map(idx => fetchQuote(idx.ticker)))
+        .then(results => {
+          const quotes = results.filter(r => r.status === 'fulfilled').map(r => r.value);
+          if (quotes.length > 0) renderMarketPulse(quotes);
+          else showError('market-pulse', 'Could not load market data');
+        });
     }
 
     // Load on page load, then refresh every 60 seconds
@@ -873,3 +885,4 @@
 
 </body>
 </html>
+
