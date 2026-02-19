@@ -3,7 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Allegory of the Trade</title>
+  <title>Allegory of the Trade — Investment Research & Analysis</title>
+  <meta name="description" content="Investment research and analysis from a college student building a hedge fund from scratch. Following the journey from dorm room to fund — the research, the process, and the lessons learned." />
+  <link rel="canonical" href="https://allegoryofthetrade.com/" />
+
+  <!-- Open Graph (Facebook, LinkedIn, iMessage) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Allegory of the Trade" />
+  <meta property="og:description" content="Investment research and analysis from a college student building a hedge fund from scratch. Following the journey from dorm room to fund." />
+  <meta property="og:url" content="https://allegoryofthetrade.com/" />
+  <meta property="og:site_name" content="Allegory of the Trade" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@Allegory_ott" />
+  <meta name="twitter:title" content="Allegory of the Trade" />
+  <meta name="twitter:description" content="Investment research and analysis from a college student building a hedge fund from scratch." />
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,6 +61,7 @@
     /* MAIN GRID */
     .main-grid { max-width: var(--max-width); margin: 0 auto; padding: 1rem 2rem 4rem; display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem; align-items: start; }
 
+    /* POSTS */
     .posts { min-width: 0; }
     .section-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 1.5rem; }
     .post-card { padding: 1.75rem 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: opacity 0.2s; }
@@ -58,10 +75,12 @@
     .read-more { display: inline-block; margin-top: 0.6rem; font-size: 0.85rem; font-weight: 500; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text); padding-bottom: 1px; transition: opacity 0.2s; }
     .read-more:hover { opacity: 0.6; }
 
+    /* SIDEBAR */
     .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
     .sidebar-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
     .sidebar-card h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
 
+    /* PORTFOLIO */
     .portfolio-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; }
     .portfolio-header h3 { margin-bottom: 0; }
     .portfolio-total { font-size: 0.8rem; font-weight: 600; color: var(--green); }
@@ -76,17 +95,20 @@
     .up { color: var(--green); }
     .down { color: var(--red); }
 
+    /* WATCHLIST */
     .watch-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
     .watch-item:last-child { border-bottom: none; }
     .watch-ticker { font-size: 0.85rem; font-weight: 600; }
     .watch-price { font-size: 0.82rem; color: var(--text-light); }
     .watch-change { font-size: 0.75rem; font-weight: 500; }
 
+    /* LOADING */
     .loading-placeholder { font-size: 0.82rem; color: var(--text-light); padding: 0.75rem 0; text-align: center; }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
     .loading-placeholder { animation: pulse 1.5s ease-in-out infinite; }
     .last-updated { font-size: 0.65rem; color: #aaa; text-align: right; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #f0f0f0; }
 
+    /* MARKET PULSE */
     .pulse-item { padding: 0.6rem 0; border-bottom: 1px solid #f0f0f0; }
     .pulse-item:last-child { border-bottom: none; }
     .pulse-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-light); margin-bottom: 0.15rem; }
@@ -94,23 +116,27 @@
     .pulse-value { font-size: 0.9rem; font-weight: 600; }
     .pulse-change { font-size: 0.78rem; font-weight: 500; }
 
+    /* ABOUT */
     .about { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 4rem; }
     .about-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; }
     .about-card h3 { font-family: 'Lora', serif; font-size: 1.3rem; margin-bottom: 0.75rem; }
     .about-card p { font-size: 0.95rem; color: var(--text-light); line-height: 1.7; }
 
+    /* NEWSLETTER */
     .newsletter { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 5rem; }
     .newsletter-box { text-align: center; padding: 3rem 2rem; border: 1px solid var(--border); border-radius: 8px; background: var(--card-bg); }
     .newsletter-box h3 { font-family: 'Lora', serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
     .newsletter-box p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem; }
     .beehiiv-form-wrapper { max-width: 480px; margin: 0 auto; }
 
+    /* FOOTER */
     footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
     footer p { font-size: 0.8rem; color: var(--text-light); }
     .footer-links { margin-top: 0.5rem; }
     .footer-links a { font-size: 0.8rem; color: var(--text-light); text-decoration: none; margin: 0 0.75rem; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
 
+    /* MOBILE */
     .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.25rem; }
     .menu-toggle span { display: block; width: 20px; height: 2px; background: var(--text); margin: 4px 0; transition: 0.2s; }
 
@@ -120,6 +146,7 @@
       .sidebar-card { flex: 1; min-width: 250px; }
     }
 
+    /* FULL POST VIEW */
     .full-post-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: var(--bg); overflow-y: auto; }
     .full-post-overlay.open { display: block; }
     .full-post-inner { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
@@ -147,6 +174,7 @@
       .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); flex-direction: column; padding: 1rem 2rem; gap: 1rem; }
       .nav-links.open { display: flex; }
       .hero h1 { font-size: 2rem; }
+      .newsletter-form { flex-direction: column; }
       .sidebar { flex-direction: column; }
       .sidebar-card { min-width: unset; }
     }
@@ -154,6 +182,7 @@
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="#" class="nav-logo">Allegory of the Trade</a>
@@ -169,35 +198,45 @@
     </div>
   </nav>
 
+  <!-- HERO -->
   <section class="hero">
     <h1>Allegory of the Trade</h1>
     <p>Documenting my investing journey — the research, the process, and the lessons learned along the way.</p>
   </section>
 
+  <!-- MAIN CONTENT GRID -->
   <div class="main-grid" id="posts">
     <section class="posts">
       <p class="section-label">Recent Posts</p>
       <div id="blog-posts-container"></div>
     </section>
+
     <aside class="sidebar">
       <div class="sidebar-card">
         <div class="portfolio-header">
           <h3>My Portfolio</h3>
           <span class="portfolio-total" id="portfolio-total">Loading...</span>
         </div>
-        <div id="portfolio-holdings"><div class="loading-placeholder">Fetching live data...</div></div>
+        <div id="portfolio-holdings">
+          <div class="loading-placeholder">Fetching live data...</div>
+        </div>
       </div>
       <div class="sidebar-card">
         <h3>Watchlist</h3>
-        <div id="watchlist-holdings"><div class="loading-placeholder">Fetching live data...</div></div>
+        <div id="watchlist-holdings">
+          <div class="loading-placeholder">Fetching live data...</div>
+        </div>
       </div>
       <div class="sidebar-card">
         <h3>Market Pulse</h3>
-        <div id="market-pulse"><div class="loading-placeholder">Fetching live data...</div></div>
+        <div id="market-pulse">
+          <div class="loading-placeholder">Fetching live data...</div>
+        </div>
       </div>
     </aside>
   </div>
 
+  <!-- FULL POST OVERLAY -->
   <div class="full-post-overlay" id="full-post-overlay">
     <div class="full-post-inner">
       <button class="full-post-back" onclick="closePost()">&#8592; Back to all posts</button>
@@ -205,6 +244,7 @@
     </div>
   </div>
 
+  <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-card">
       <h3>About</h3>
@@ -212,6 +252,7 @@
     </div>
   </section>
 
+  <!-- NEWSLETTER -->
   <section class="newsletter" id="subscribe">
     <div class="newsletter-box">
       <h3>Stay in the loop</h3>
@@ -223,79 +264,212 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <p>&copy; 2026 Allegory of the Trade. All rights reserved.</p>
     <div class="footer-links">
-      <a href="#">Twitter</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">RSS</a>
+      <a href="https://x.com/Allegory_ott" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://allegoryofthetrade.beehiiv.com" target="_blank" rel="noopener">Newsletter</a>
     </div>
   </footer>
 
   <script>
+    // BLOG POSTS
     const STORAGE_KEY = 'blank_blog_posts';
     let allPosts = [];
+
     async function loadPosts() {
-      try { const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (stored && stored.length > 0) { allPosts = stored.filter(p => p.status === 'published'); renderBlogPosts(); return; } } catch {}
-      try { const res = await fetch('posts.json'); if (res.ok) { const data = await res.json(); allPosts = data.filter(p => p.status === 'published'); } } catch {}
+      try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (stored && stored.length > 0) { allPosts = stored.filter(p => p.status === 'published'); renderBlogPosts(); return; }
+      } catch {}
+      try {
+        const res = await fetch('posts.json');
+        if (res.ok) { const data = await res.json(); allPosts = data.filter(p => p.status === 'published'); }
+      } catch {}
       renderBlogPosts();
     }
+
     function getBlogPosts() { return allPosts; }
+
     function markdownToHtml(md) {
-      let html = md.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/^### (.+)$/gm,'<h3>$1</h3>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/^---$/gm,'<hr>').replace(/^&gt; (.+)$/gm,'<blockquote>$1</blockquote>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/^- (.+)$/gm,'<li>$1</li>').split('\n\n').map(block => { block = block.trim(); if (!block) return ''; if (/^<[hblu]|^<li|^<hr/.test(block)) return block; return '<p>' + block.replace(/\n/g,'<br>') + '</p>'; }).join('\n');
-      html = html.replace(/(<li>.*?<\/li>\n?)+/g,'<ul>$&</ul>');
+      let html = md
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/^### (.+)$/gm, '<h3>$1<\/h3>')
+        .replace(/^## (.+)$/gm, '<h2>$1<\/h2>')
+        .replace(/^---$/gm, '<hr>')
+        .replace(/^&gt; (.+)$/gm, '<blockquote>$1<\/blockquote>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1<\/strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1<\/em>')
+        .replace(/^- (.+)$/gm, '<li>$1<\/li>')
+        .split('\n\n').map(block => {
+          block = block.trim();
+          if (!block) return '';
+          if (/^<[hblu]|^<li|^<hr/.test(block)) return block;
+          return '<p>' + block.replace(/\n/g, '<br>') + '<\/p>';
+        }).join('\n');
+      html = html.replace(/(<li>.*?<\/li>\n?)+/g, '<ul>$&<\/ul>');
       return html;
     }
+
     function renderBlogPosts() {
-      const posts = getBlogPosts(); const container = document.getElementById('blog-posts-container');
-      if (posts.length === 0) { container.innerHTML = '<div class="no-posts-msg"><p>No posts yet.</p></div>'; return; }
-      container.innerHTML = posts.map(p => { const date = new Date(p.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); return '<article class="post-card" onclick="openPost(\''+p.id+'\')"><div class="post-meta"><span class="post-tag">'+p.tag+'</span><span class="post-date">'+date+'</span></div><h2>'+p.title+'</h2><p>'+p.excerpt+'</p><span class="read-more">Read more</span></article>'; }).join('');
+      const posts = getBlogPosts();
+      const container = document.getElementById('blog-posts-container');
+      if (posts.length === 0) {
+        container.innerHTML = '<div class="no-posts-msg"><p>No posts yet.<\/p><p><a href="admin.html">Write your first post &rarr;<\/a><\/p><\/div>';
+        return;
+      }
+      container.innerHTML = posts.map(p => {
+        const date = new Date(p.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        return '<article class="post-card" onclick="openPost(\'' + p.id + '\')">' +
+          '<div class="post-meta"><span class="post-tag">' + p.tag + '<\/span><span class="post-date">' + date + '<\/span><\/div>' +
+          '<h2>' + p.title + '<\/h2><p>' + p.excerpt + '<\/p><span class="read-more">Read more<\/span><\/article>';
+      }).join('');
     }
+
     function openPost(id) {
-      const post = getBlogPosts().find(p => p.id === id); if (!post) return;
-      const date = new Date(post.createdAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-      document.getElementById('full-post-content').innerHTML = '<span class="full-post-tag">'+post.tag+'</span><h1 class="full-post-title">'+post.title+'</h1><div class="full-post-date">'+date+'</div><div class="full-post-body">'+markdownToHtml(post.body)+'</div>';
-      document.getElementById('full-post-overlay').classList.add('open'); window.scrollTo({top:0});
+      const posts = getBlogPosts();
+      const post = posts.find(p => p.id === id);
+      if (!post) return;
+      const date = new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById('full-post-content').innerHTML =
+        '<span class="full-post-tag">' + post.tag + '<\/span>' +
+        '<h1 class="full-post-title">' + post.title + '<\/h1>' +
+        '<div class="full-post-date">' + date + '<\/div>' +
+        '<div class="full-post-body">' + markdownToHtml(post.body) + '<\/div>';
+      document.getElementById('full-post-overlay').classList.add('open');
+      window.scrollTo({ top: 0 });
     }
+
     function closePost() { document.getElementById('full-post-overlay').classList.remove('open'); }
-    if (location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1') { document.getElementById('admin-link').style.display = ''; }
+
+    if (location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      document.getElementById('admin-link').style.display = '';
+    }
+
     loadPosts();
   </script>
 
   <script>
-    const PORTFOLIO = [{ticker:'GEHC',name:'GE HealthCare'},{ticker:'ACNT',name:'Ascent Industries'}];
-    const WATCHLIST = [{ticker:'HON'},{ticker:'SOLS'}];
-    const INDICES = [{ticker:'^GSPC',label:'S&P 500'},{ticker:'^IXIC',label:'Nasdaq'},{ticker:'^TNX',label:'10Y Treasury'},{ticker:'^VIX',label:'VIX'},{ticker:'GC=F',label:'Gold'}];
-    const WORKER_URLS = ['https://api.allegoryofthetrade.com/?ticker=','https://stock-proxy.reedmcasey.workers.dev/?ticker='];
+    // CONFIGURATION
+    const PORTFOLIO = [
+      { ticker: 'GEHC', name: 'GE HealthCare' },
+      { ticker: 'ACNT', name: 'Ascent Industries' },
+    ];
+    const WATCHLIST = [
+      { ticker: 'HON' },
+      { ticker: 'SOLS' },
+    ];
+    const INDICES = [
+      { ticker: '^GSPC', label: 'S&P 500' },
+      { ticker: '^IXIC', label: 'Nasdaq' },
+      { ticker: '^TNX',  label: '10Y Treasury' },
+      { ticker: '^VIX',  label: 'VIX' },
+      { ticker: 'GC=F',  label: 'Gold' },
+    ];
+
+    const WORKER_URLS = [
+      'https://api.allegoryofthetrade.com/?ticker=',
+      'https://stock-proxy.reedmcasey.workers.dev/?ticker=',
+    ];
     const YF_BASE = 'https://query1.finance.yahoo.com/v8/finance/chart/';
-    const PROXIES = [url=>'https://corsproxy.io/?'+encodeURIComponent(url),url=>'https://api.allorigins.win/raw?url='+encodeURIComponent(url),url=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(url)];
+    const PROXIES = [
+      url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+      url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+      url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+    ];
+
     async function fetchQuote(ticker) {
-      for (const workerUrl of WORKER_URLS) { try { const res = await fetch(workerUrl+encodeURIComponent(ticker),{signal:AbortSignal.timeout(6000)}); if (res.ok) { const data = await res.json(); if (data.price !== undefined) return data; } } catch {} }
-      const yfUrl = YF_BASE+encodeURIComponent(ticker)+'?interval=1d&range=5d'; let lastError;
-      for (const makeProxy of PROXIES) { try { const url = makeProxy(yfUrl); const res = await fetch(url,{signal:AbortSignal.timeout(8000)}); if (!res.ok) throw new Error('HTTP '+res.status); const data = await res.json(); const meta = data.chart.result[0].meta; const price = meta.regularMarketPrice; const prevClose = meta.chartPreviousClose||meta.previousClose; const change = ((price-prevClose)/prevClose)*100; return {ticker,price,change,shortName:meta.shortName||meta.symbol}; } catch(e) { lastError = e; } }
+      for (const workerUrl of WORKER_URLS) {
+        try {
+          const res = await fetch(workerUrl + encodeURIComponent(ticker), { signal: AbortSignal.timeout(6000) });
+          if (res.ok) { const data = await res.json(); if (data.price !== undefined) return data; }
+        } catch {}
+      }
+      const yfUrl = `${YF_BASE}${encodeURIComponent(ticker)}?interval=1d&range=5d`;
+      let lastError;
+      for (const makeProxy of PROXIES) {
+        try {
+          const url = makeProxy(yfUrl);
+          const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          const meta = data.chart.result[0].meta;
+          const price = meta.regularMarketPrice;
+          const prevClose = meta.chartPreviousClose || meta.previousClose;
+          const change = ((price - prevClose) / prevClose) * 100;
+          return { ticker, price, change, shortName: meta.shortName || meta.symbol };
+        } catch (e) { lastError = e; }
+      }
       throw lastError;
     }
-    function fmtPrice(p) { if (p>=1000) return '$'+p.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); return '$'+p.toFixed(2); }
-    function fmtChange(c) { return (c>=0?'+':'')+c.toFixed(2)+'%'; }
-    function cls(c) { return c>=0?'up':'down'; }
+
+    function fmtPrice(p) {
+      if (p >= 1000) return '$' + p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return '$' + p.toFixed(2);
+    }
+    function fmtChange(c) { return (c >= 0 ? '+' : '') + c.toFixed(2) + '%'; }
+    function cls(c) { return c >= 0 ? 'up' : 'down'; }
+
     function renderPortfolio(quotes) {
-      const container = document.getElementById('portfolio-holdings'); const avgChange = quotes.reduce((s,q)=>s+q.change,0)/quotes.length;
-      const totalEl = document.getElementById('portfolio-total'); totalEl.textContent = fmtChange(avgChange)+' today'; totalEl.className = 'portfolio-total '+cls(avgChange);
-      container.innerHTML = quotes.map(q => { const name = PORTFOLIO.find(p=>p.ticker===q.ticker)?.name||q.shortName; return '<div class="holding"><div class="holding-left"><span class="holding-ticker">'+q.ticker+'</span><span class="holding-name">'+name+'</span></div><div class="holding-right"><div class="holding-value">'+fmtPrice(q.price)+'</div><div class="holding-change '+cls(q.change)+'">'+fmtChange(q.change)+'</div></div></div>'; }).join('')+'<div class="last-updated">Updated '+new Date().toLocaleTimeString()+'</div>';
+      const container = document.getElementById('portfolio-holdings');
+      const avgChange = quotes.reduce((s, q) => s + q.change, 0) / quotes.length;
+      const totalEl = document.getElementById('portfolio-total');
+      totalEl.textContent = fmtChange(avgChange) + ' today';
+      totalEl.className = 'portfolio-total ' + cls(avgChange);
+      container.innerHTML = quotes.map(q => {
+        const nameOverride = PORTFOLIO.find(p => p.ticker === q.ticker)?.name || q.shortName;
+        return '<div class="holding"><div class="holding-left"><span class="holding-ticker">' + q.ticker + '<\/span><span class="holding-name">' + nameOverride + '<\/span><\/div><div class="holding-right"><div class="holding-value">' + fmtPrice(q.price) + '<\/div><div class="holding-change ' + cls(q.change) + '">' + fmtChange(q.change) + '<\/div><\/div><\/div>';
+      }).join('') + '<div class="last-updated">Updated ' + new Date().toLocaleTimeString() + '<\/div>';
     }
+
     function renderWatchlist(quotes) {
-      document.getElementById('watchlist-holdings').innerHTML = quotes.map(q=>'<div class="watch-item"><div><span class="watch-ticker">'+q.ticker+'</span></div><div style="text-align:right"><span class="watch-price">'+fmtPrice(q.price)+'</span><div class="watch-change '+cls(q.change)+'">'+fmtChange(q.change)+'</div></div></div>').join('')+'<div class="last-updated">Updated '+new Date().toLocaleTimeString()+'</div>';
+      const container = document.getElementById('watchlist-holdings');
+      container.innerHTML = quotes.map(q => '<div class="watch-item"><div><span class="watch-ticker">' + q.ticker + '<\/span><\/div><div style="text-align:right"><span class="watch-price">' + fmtPrice(q.price) + '<\/span><div class="watch-change ' + cls(q.change) + '">' + fmtChange(q.change) + '<\/div><\/div><\/div>').join('') + '<div class="last-updated">Updated ' + new Date().toLocaleTimeString() + '<\/div>';
     }
+
     function renderMarketPulse(quotes) {
-      document.getElementById('market-pulse').innerHTML = quotes.map((q,i)=>{ const label=INDICES[i].label; const dp=q.ticker==='^TNX'?q.price.toFixed(3)+'%':q.ticker==='GC=F'?'$'+q.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):q.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); return '<div class="pulse-item"><div class="pulse-label">'+label+'</div><div class="pulse-row"><span class="pulse-value">'+dp+'</span><span class="pulse-change '+cls(q.change)+'">'+fmtChange(q.change)+'</span></div></div>'; }).join('')+'<div class="last-updated">Updated '+new Date().toLocaleTimeString()+'</div>';
+      const container = document.getElementById('market-pulse');
+      container.innerHTML = quotes.map((q, i) => {
+        const label = INDICES[i].label;
+        const isTreasury = q.ticker === '^TNX';
+        const isGold = q.ticker === 'GC=F';
+        const displayPrice = isTreasury ? q.price.toFixed(3) + '%'
+          : isGold ? '$' + q.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          : q.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return '<div class="pulse-item"><div class="pulse-label">' + label + '<\/div><div class="pulse-row"><span class="pulse-value">' + displayPrice + '<\/span><span class="pulse-change ' + cls(q.change) + '">' + fmtChange(q.change) + '<\/span><\/div><\/div>';
+      }).join('') + '<div class="last-updated">Updated ' + new Date().toLocaleTimeString() + '<\/div>';
     }
-    function showError(id,msg) { const el=document.getElementById(id); if(el) el.innerHTML='<div class="loading-placeholder" style="animation:none;color:var(--red);font-size:0.78rem">'+msg+'</div>'; }
+
+    function showError(containerId, msg) {
+      const el = document.getElementById(containerId);
+      if (el) el.innerHTML = '<div class="loading-placeholder" style="animation:none;color:var(--red);font-size:0.78rem">' + msg + '<\/div>';
+    }
+
     async function loadAll() {
-      Promise.allSettled(PORTFOLIO.map(p=>fetchQuote(p.ticker))).then(r=>{ const q=r.filter(x=>x.status==='fulfilled').map(x=>x.value); if(q.length>0) renderPortfolio(q); else showError('portfolio-holdings','Could not load portfolio data'); });
-      Promise.allSettled(WATCHLIST.map(w=>fetchQuote(w.ticker))).then(r=>{ const q=r.filter(x=>x.status==='fulfilled').map(x=>x.value); if(q.length>0) renderWatchlist(q); else showError('watchlist-holdings','Could not load watchlist data'); });
-      Promise.allSettled(INDICES.map(idx=>fetchQuote(idx.ticker))).then(r=>{ const q=r.filter(x=>x.status==='fulfilled').map(x=>x.value); if(q.length>0) renderMarketPulse(q); else showError('market-pulse','Could not load market data'); });
+      Promise.allSettled(PORTFOLIO.map(p => fetchQuote(p.ticker)))
+        .then(results => {
+          const quotes = results.filter(r => r.status === 'fulfilled').map(r => r.value);
+          if (quotes.length > 0) renderPortfolio(quotes);
+          else showError('portfolio-holdings', 'Could not load portfolio data');
+        });
+      Promise.allSettled(WATCHLIST.map(w => fetchQuote(w.ticker)))
+        .then(results => {
+          const quotes = results.filter(r => r.status === 'fulfilled').map(r => r.value);
+          if (quotes.length > 0) renderWatchlist(quotes);
+          else showError('watchlist-holdings', 'Could not load watchlist data');
+        });
+      Promise.allSettled(INDICES.map(idx => fetchQuote(idx.ticker)))
+        .then(results => {
+          const quotes = results.filter(r => r.status === 'fulfilled').map(r => r.value);
+          if (quotes.length > 0) renderMarketPulse(quotes);
+          else showError('market-pulse', 'Could not load market data');
+        });
     }
-    loadAll(); setInterval(loadAll,60000);
+
+    loadAll();
+    setInterval(loadAll, 60000);
   </script>
+
 </body>
 </html>
