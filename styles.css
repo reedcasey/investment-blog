@@ -466,7 +466,9 @@ nav {
 }
 .beehiiv-form-wrapper {
   max-width: 480px;
+  width: 100%;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 /* ==========================================
@@ -651,11 +653,36 @@ footer p {
     gap: 1rem;
   }
   .nav-links.open { display: flex; }
+  .hero { padding: 2.5rem 1.25rem 1.5rem; }
   .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 0.95rem; }
+  .main-grid { padding: 1rem 1.25rem 3rem; }
   .sidebar { flex-direction: column; }
   .sidebar-card { min-width: unset; }
-  .scoreboard-meta { flex-direction: column; }
-  .scoreboard-table { font-size: 0.8rem; }
-  .scoreboard-table th, .scoreboard-table td { padding: 0.65rem 0.6rem; }
-  .col-company { min-width: 140px; }
+
+  /* Newsletter mobile */
+  .newsletter { padding: 0 1.25rem 3rem; }
+  .newsletter-box { padding: 2rem 1.25rem; }
+  .newsletter-box h3 { font-size: 1.15rem; }
+  .newsletter-box p { font-size: 0.85rem; margin-bottom: 1rem; }
+  .beehiiv-form-wrapper { max-width: 100%; }
+
+  /* About mobile */
+  .about { padding: 0 1.25rem 3rem; }
+  .about-card { padding: 1.75rem 1.25rem; }
+
+  /* Scoreboard mobile */
+  .scoreboard-section { padding: 0 1.25rem 3rem; }
+  .scoreboard-meta { flex-direction: column; gap: 0.25rem; }
+  .scoreboard-methodology { font-size: 0.68rem; }
+  .scoreboard-table { font-size: 0.78rem; }
+  .scoreboard-table th { padding: 0.6rem 0.5rem; font-size: 0.65rem; }
+  .scoreboard-table td { padding: 0.7rem 0.5rem; }
+  .col-company { min-width: 130px; }
+  .scoreboard-footer-note { padding: 1rem; }
+  .scoreboard-footer-note p { font-size: 0.72rem; }
+  .scoreboard-footer-note .scoreboard-cta { font-size: 0.78rem; }
+
+  /* Footer mobile */
+  footer { padding: 1.5rem 1.25rem; }
 }
