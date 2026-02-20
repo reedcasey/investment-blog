@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0MS6HSSRVY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0MS6HSSRVY');
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Microcaps &mdash; Allegory of the Trade</title>
+  <meta name="description" content="Monthly ranked microcap stock picks with live return tracking. Screened from every SEC-filing company using a quantitative scoring model." />
+  <link rel="canonical" href="https://allegoryofthetrade.com/scoreboard.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Top Microcaps &mdash; Allegory of the Trade" />
+  <meta property="og:description" content="Monthly ranked microcap stock picks with live return tracking." />
+  <meta property="og:url" content="https://allegoryofthetrade.com/scoreboard.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@Allegory_ott" />
+  <meta name="twitter:title" content="Top Microcaps &mdash; Allegory of the Trade" />
+
+  <!-- Fonts & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Allegory of the Trade</a>
+      <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Writing</a></li>
+        <li><a href="scoreboard.html" class="active">Microcap Picks</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#subscribe">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- SCOREBOARD HERO -->
+  <section class="hero">
+    <h1>Top Microcaps</h1>
+    <p>Ranked monthly by a quantitative scoring model that screens every SEC-filing microcap for value, quality, financial strength, and insider buying. Returns tracked from date of inclusion.</p>
+  </section>
+
+  <!-- SCOREBOARD TABLE -->
+  <section class="scoreboard-section">
+
+    <div class="scoreboard-meta">
+      <div class="scoreboard-meta-left">
+        <span class="scoreboard-label">Current List</span>
+        <span class="scoreboard-date" id="list-date"></span>
+      </div>
+      <div class="scoreboard-meta-right">
+        <span class="scoreboard-methodology">Methodology: Value (40%) &middot; Quality (30%) &middot; Strength (20%) &middot; Insider (10%)</span>
+      </div>
+    </div>
+
+    <div class="scoreboard-table-wrap">
+      <table class="scoreboard-table">
+        <thead>
+          <tr>
+            <th class="col-rank">#</th>
+            <th class="col-company">Company</th>
+            <th class="col-ticker">Ticker</th>
+            <th class="col-mcap">Market Cap</th>
+            <th class="col-score">Score</th>
+            <th class="col-added">Added</th>
+            <th class="col-months">Months</th>
+            <th class="col-return">Return</th>
+          </tr>
+        </thead>
+        <tbody id="scoreboard-body">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scoreboard-footer-note">
+      <p>Returns calculated from closing price on date of inclusion. List resets monthly &mdash; companies may appear on consecutive lists if they continue to score well. Past performance is not indicative of future results. This is not investment advice.</p>
+      <p class="scoreboard-cta">Want the full Top 50 with detailed metrics? <a href="/#subscribe">Join the newsletter</a> &mdash; premium tiers coming soon.</p>
+    </div>
+
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="subscribe">
+    <div class="newsletter-box">
+      <h3>Stay in the loop</h3>
+      <p>Get new picks and posts delivered to your inbox. No spam, unsubscribe anytime.</p>
+      <div class="beehiiv-form-wrapper">
+        <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+        <iframe src="https://subscribe-forms.beehiiv.com/1cc98477-6de8-44c5-a840-ca794295ec73" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 100%; max-width: 480px; height: 55px; margin: 0 auto; border-radius: 6px !important; background-color: transparent; box-shadow: 0 0 #0000; display: block;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Allegory of the Trade. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="https://x.com/Allegory_ott" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://allegoryofthetrade.beehiiv.com" target="_blank" rel="noopener">Newsletter</a>
+    </div>
+  </footer>
+
+  <script src="scoreboard-data.js"></script>
+
+</body>
+</html>
