@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Allegory of the Trade â Admin</title>
+  <title>Allegory of the Trade &mdash; Admin</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
@@ -541,7 +541,7 @@
       listEl.innerHTML = posts.map(p => {
         const date = new Date(p.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         const statusBadge = p.status === 'draft'
-          ? '<span style="color:var(--text-light);font-style:italic"> â Draft</span>'
+          ? '<span style="color:var(--text-light);font-style:italic"> &mdash; Draft</span>'
           : '';
         return `
           <li class="post-row">
@@ -633,7 +633,7 @@
     }
 
     // ==========================================
-    // DEPLOY â EXPORT / IMPORT
+    // DEPLOY -- EXPORT / IMPORT
     // ==========================================
     function exportPostsJson() {
       const posts = getPosts().filter(p => p.status === 'published');
@@ -680,7 +680,7 @@
         document.getElementById('import-json').value = '';
         setTimeout(() => statusEl.classList.remove('show'), 3000);
       } catch (e) {
-        statusEl.textContent = 'Invalid JSON â check the format';
+        statusEl.textContent = 'Invalid JSON \u2014 check the format';
         statusEl.style.color = 'var(--red)';
         statusEl.classList.add('show');
         setTimeout(() => statusEl.classList.remove('show'), 3000);
@@ -688,7 +688,7 @@
     }
 
     // ==========================================
-    // INIT â seed from posts.json if localStorage is empty
+    // INIT -- seed from posts.json if localStorage is empty
     // ==========================================
     (async function init() {
       const existing = getPosts();
