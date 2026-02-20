@@ -3,88 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Allegory of the Trade — Write</title>
+  <title>Allegory of the Trade â Admin</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --text: #1a1a1a;
-      --text-light: #6b6b6b;
-      --bg: #fafafa;
-      --card-bg: #ffffff;
-      --border: #e8e8e8;
-      --accent: #2c2c2c;
-      --green: #16a34a;
-      --red: #dc2626;
-      --blue: #2563eb;
-      --max-width: 900px;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250, 250, 250, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .nav-logo {
-      font-family: 'Lora', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-badge {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      background: var(--accent);
-      color: #fff;
-      padding: 0.15rem 0.5rem;
-      border-radius: 3px;
-      margin-left: 0.5rem;
-      vertical-align: middle;
-    }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-light);
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    /* LAYOUT */
+    /* ==========================================
+       ADMIN-SPECIFIC STYLES
+       (extends shared styles.css)
+       ========================================== */
     .page {
-      max-width: var(--max-width);
+      max-width: 900px;
       margin: 0 auto;
       padding: 2.5rem 2rem 4rem;
     }
-    .page-header {
-      margin-bottom: 2rem;
-    }
+    .page-header { margin-bottom: 2rem; }
     .page-header h1 {
       font-family: 'Lora', serif;
       font-size: 1.8rem;
@@ -96,7 +28,7 @@
       font-size: 0.92rem;
     }
 
-    /* TABS */
+    /* Tabs */
     .tabs {
       display: flex;
       gap: 0;
@@ -118,14 +50,11 @@
       font-family: inherit;
     }
     .tab:hover { color: var(--text); }
-    .tab.active {
-      color: var(--text);
-      border-bottom-color: var(--text);
-    }
+    .tab.active { color: var(--text); border-bottom-color: var(--text); }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* EDITOR */
+    /* Editor */
     .editor-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -159,24 +88,11 @@
     .field input:focus,
     .field select:focus,
     .field textarea:focus { border-color: var(--accent); background: #fff; }
-    .field textarea {
-      min-height: 300px;
-      resize: vertical;
-      line-height: 1.8;
-    }
-    .field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
+    .field textarea { min-height: 300px; resize: vertical; line-height: 1.8; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-    /* TOOLBAR */
-    .toolbar {
-      display: flex;
-      gap: 0.25rem;
-      margin-bottom: 0.5rem;
-      flex-wrap: wrap;
-    }
+    /* Toolbar */
+    .toolbar { display: flex; gap: 0.25rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
     .toolbar button {
       padding: 0.35rem 0.65rem;
       font-size: 0.78rem;
@@ -191,13 +107,8 @@
     }
     .toolbar button:hover { background: var(--border); color: var(--text); }
 
-    /* ACTIONS */
-    .actions {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-      align-items: center;
-    }
+    /* Action buttons */
+    .actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; align-items: center; }
     .btn {
       padding: 0.7rem 1.5rem;
       font-size: 0.9rem;
@@ -221,7 +132,7 @@
     }
     .status-msg.show { opacity: 1; }
 
-    /* POSTS LIST */
+    /* Post list */
     .posts-list { list-style: none; }
     .post-row {
       display: flex;
@@ -243,11 +154,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .post-row-meta {
-      font-size: 0.75rem;
-      color: var(--text-light);
-      margin-top: 0.15rem;
-    }
+    .post-row-meta { font-size: 0.75rem; color: var(--text-light); margin-top: 0.15rem; }
     .post-row-actions { display: flex; gap: 0.5rem; flex-shrink: 0; margin-left: 1rem; }
     .post-row-actions button {
       padding: 0.35rem 0.75rem;
@@ -263,20 +170,10 @@
     .post-row-actions button:hover { background: var(--border); }
     .post-row-actions .delete-btn { color: var(--red); border-color: var(--red); }
     .post-row-actions .delete-btn:hover { background: #fef2f2; }
+    .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-light); font-size: 0.92rem; }
+    .post-count { font-size: 0.8rem; color: var(--text-light); margin-bottom: 1rem; }
 
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: var(--text-light);
-      font-size: 0.92rem;
-    }
-    .post-count {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      margin-bottom: 1rem;
-    }
-
-    /* PREVIEW */
+    /* Preview */
     .preview-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -302,21 +199,11 @@
       line-height: 1.3;
       margin-bottom: 0.5rem;
     }
-    .preview-card .preview-date {
-      font-size: 0.82rem;
-      color: var(--text-light);
-      margin-bottom: 1.5rem;
-    }
-    .preview-card .preview-body {
-      font-size: 1rem;
-      line-height: 1.85;
-      color: #333;
-    }
+    .preview-card .preview-date { font-size: 0.82rem; color: var(--text-light); margin-bottom: 1.5rem; }
+    .preview-card .preview-body { font-size: 1rem; line-height: 1.85; color: #333; }
     .preview-card .preview-body p { margin-bottom: 1rem; }
-    .preview-card .preview-body h2, .preview-card .preview-body h3 {
-      font-family: 'Lora', serif;
-      margin: 1.5rem 0 0.75rem;
-    }
+    .preview-card .preview-body h2,
+    .preview-card .preview-body h3 { font-family: 'Lora', serif; margin: 1.5rem 0 0.75rem; }
     .preview-card .preview-body strong { font-weight: 600; }
     .preview-card .preview-body em { font-style: italic; }
     .preview-card .preview-body blockquote {
@@ -326,14 +213,9 @@
       color: var(--text-light);
       font-style: italic;
     }
-    .preview-empty {
-      text-align: center;
-      padding: 3rem;
-      color: var(--text-light);
-      font-size: 0.92rem;
-    }
+    .preview-empty { text-align: center; padding: 3rem; color: var(--text-light); font-size: 0.92rem; }
 
-    /* DEPLOY TAB */
+    /* Deploy tab */
     .deploy-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -341,23 +223,13 @@
       padding: 2rem;
       margin-bottom: 1.25rem;
     }
-    .deploy-card h3 {
-      font-family: 'Lora', serif;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-    .deploy-card p {
-      font-size: 0.9rem;
-      color: var(--text-light);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
+    .deploy-card h3 { font-family: 'Lora', serif; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .deploy-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; margin-bottom: 1rem; }
     .deploy-card .step-num {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
+      width: 24px; height: 24px;
       border-radius: 50%;
       background: var(--accent);
       color: #fff;
@@ -366,22 +238,10 @@
       margin-right: 0.5rem;
       flex-shrink: 0;
     }
-    .deploy-steps {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .deploy-steps li {
-      display: flex;
-      align-items: flex-start;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
+    .deploy-steps { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .deploy-steps li { display: flex; align-items: flex-start; font-size: 0.9rem; line-height: 1.5; }
     .deploy-steps li span { padding-top: 2px; }
-    .import-area {
-      margin-top: 1rem;
-    }
+    .import-area { margin-top: 1rem; }
     .import-area textarea {
       width: 100%;
       min-height: 100px;
@@ -463,7 +323,7 @@
             <button onclick="insertMarkdown('\n### ', '\n')" title="Sub-heading">H3</button>
             <button onclick="insertMarkdown('\n> ', '\n')" title="Blockquote">"</button>
             <button onclick="insertMarkdown('\n- ', '\n')" title="List">List</button>
-            <button onclick="insertMarkdown('\n---\n', '')" title="Divider">—</button>
+            <button onclick="insertMarkdown('\n---\n', '')" title="Divider">&mdash;</button>
           </div>
           <textarea id="post-body" placeholder="Write your post here. You can use simple Markdown:&#10;&#10;**bold text**&#10;*italic text*&#10;## Heading&#10;> Blockquote&#10;- List item"></textarea>
         </div>
@@ -495,7 +355,7 @@
         <ol class="deploy-steps">
           <li><span class="step-num">1</span><span>Click <strong>Export posts.json</strong> below to download your latest posts</span></li>
           <li><span class="step-num">2</span><span>Replace the <code>posts.json</code> file in your site folder with the downloaded one</span></li>
-          <li><span class="step-num">3</span><span>Commit and push to GitHub — your site updates automatically</span></li>
+          <li><span class="step-num">3</span><span>Commit and push to GitHub &mdash; your site updates automatically</span></li>
         </ol>
         <div style="margin-top:1.25rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
           <button class="btn btn-primary" onclick="exportPostsJson()">Export posts.json</button>
@@ -515,23 +375,23 @@
 
       <div class="deploy-card">
         <h3>Hosting Quick Start</h3>
-        <p>Your site is ready for free hosting on GitHub Pages. Here's the setup:</p>
+        <p>Your site is hosted on GitHub Pages with a custom domain via Cloudflare.</p>
         <ol class="deploy-steps">
-          <li><span class="step-num">1</span><span>Create a GitHub repository (e.g. <code>my-investment-blog</code>)</span></li>
-          <li><span class="step-num">2</span><span>Upload <code>index.html</code>, <code>admin.html</code>, and <code>posts.json</code> — rename <code>index.html</code> to <code>index.html</code></span></li>
-          <li><span class="step-num">3</span><span>Go to Settings → Pages → set source to <strong>main branch</strong></span></li>
-          <li><span class="step-num">4</span><span>Your site will be live at <code>username.github.io/repo-name</code></span></li>
-          <li><span class="step-num">5</span><span>To use a custom domain, add it in the Pages settings and update your DNS</span></li>
+          <li><span class="step-num">1</span><span>Edit files in the <code>reedcasey/investment-blog</code> repo on GitHub</span></li>
+          <li><span class="step-num">2</span><span>Commit changes to main branch</span></li>
+          <li><span class="step-num">3</span><span>GitHub Pages auto-deploys to <code>allegoryofthetrade.com</code></span></li>
         </ol>
       </div>
     </div>
   </div>
 
+  <!-- Admin uses the shared markdown parser from blog.js -->
+  <script src="blog.js"></script>
   <script>
     // ==========================================
     // STORAGE
     // ==========================================
-    const STORAGE_KEY = 'blank_blog_posts';
+    // STORAGE_KEY is already defined in blog.js
 
     function getPosts() {
       try {
@@ -559,7 +419,7 @@
     });
 
     // ==========================================
-    // MARKDOWN HELPERS
+    // MARKDOWN TOOLBAR
     // ==========================================
     function insertMarkdown(before, after) {
       const ta = document.getElementById('post-body');
@@ -569,34 +429,6 @@
       const replacement = before + (selected || 'text') + after;
       ta.setRangeText(replacement, start, end, 'select');
       ta.focus();
-    }
-
-    function markdownToHtml(md) {
-      let html = md
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-        // headings
-        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-        // hr
-        .replace(/^---$/gm, '<hr>')
-        // blockquote
-        .replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>')
-        // bold & italic
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.+?)\*/g, '<em>$1</em>')
-        // list items
-        .replace(/^- (.+)$/gm, '<li>$1</li>')
-        // paragraphs
-        .split('\n\n').map(block => {
-          block = block.trim();
-          if (!block) return '';
-          if (/^<[hblu]|^<li|^<hr/.test(block)) return block;
-          return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
-        }).join('\n');
-
-      // wrap consecutive <li> in <ul>
-      html = html.replace(/(<li>.*?<\/li>\n?)+/g, '<ul>$&</ul>');
-      return html;
     }
 
     // ==========================================
@@ -616,14 +448,12 @@
       const now = new Date().toISOString();
 
       if (editingId) {
-        // Update existing
         const idx = posts.findIndex(p => p.id === editingId);
         if (idx !== -1) {
           posts[idx] = { ...posts[idx], title, tag, excerpt, body, status: 'published', updatedAt: now };
         }
         document.getElementById('editing-id').value = '';
       } else {
-        // New post
         posts.unshift({
           id: 'post_' + Date.now(),
           title,
@@ -711,13 +541,13 @@
       listEl.innerHTML = posts.map(p => {
         const date = new Date(p.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         const statusBadge = p.status === 'draft'
-          ? '<span style="color:var(--text-light);font-style:italic"> — Draft</span>'
+          ? '<span style="color:var(--text-light);font-style:italic"> â Draft</span>'
           : '';
         return `
           <li class="post-row">
             <div class="post-row-left">
               <div class="post-row-title">${p.title}${statusBadge}</div>
-              <div class="post-row-meta">${p.tag} · ${date}</div>
+              <div class="post-row-meta">${p.tag} Â· ${date}</div>
             </div>
             <div class="post-row-actions">
               <button onclick="editPost('${p.id}')">Edit</button>
@@ -779,7 +609,7 @@
     }
 
     // ==========================================
-    // PREVIEW
+    // PREVIEW (uses markdownToHtml from blog.js)
     // ==========================================
     function renderPreview() {
       const title = document.getElementById('post-title').value.trim();
@@ -803,7 +633,7 @@
     }
 
     // ==========================================
-    // DEPLOY — EXPORT / IMPORT
+    // DEPLOY â EXPORT / IMPORT
     // ==========================================
     function exportPostsJson() {
       const posts = getPosts().filter(p => p.status === 'published');
@@ -850,7 +680,7 @@
         document.getElementById('import-json').value = '';
         setTimeout(() => statusEl.classList.remove('show'), 3000);
       } catch (e) {
-        statusEl.textContent = 'Invalid JSON — check the format';
+        statusEl.textContent = 'Invalid JSON â check the format';
         statusEl.style.color = 'var(--red)';
         statusEl.classList.add('show');
         setTimeout(() => statusEl.classList.remove('show'), 3000);
@@ -858,7 +688,7 @@
     }
 
     // ==========================================
-    // INIT — seed from posts.json if localStorage is empty
+    // INIT â seed from posts.json if localStorage is empty
     // ==========================================
     (async function init() {
       const existing = getPosts();
