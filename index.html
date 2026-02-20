@@ -12,8 +12,8 @@
     gtag('config', 'G-0MS6HSSRVY');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Allegory of the Trade â Investment Research & Analysis</title>
-  <meta name="description" content="Investment research and analysis from a college student building a hedge fund from scratch. Following the journey from dorm room to fund â the research, the process, and the lessons learned." />
+  <title>Allegory of the Trade — Investment Research & Analysis</title>
+  <meta name="description" content="Investment research and analysis from a college student building a hedge fund from scratch. Following the journey from dorm room to fund — the research, the process, and the lessons learned." />
   <link rel="canonical" href="https://allegoryofthetrade.com/" />
 
   <!-- Open Graph (Facebook, LinkedIn, iMessage) -->
@@ -522,7 +522,7 @@
   <!-- HERO -->
   <section class="hero">
     <h1>Allegory of the Trade</h1>
-    <p>Documenting my investing journey â the research, the process, and the lessons learned along the way.</p>
+    <p>Documenting my investing journey — the research, the process, and the lessons learned along the way.</p>
   </section>
 
   <!-- MAIN CONTENT GRID -->
@@ -579,7 +579,7 @@
   <section class="about" id="about">
     <div class="about-card">
       <h3>About</h3>
-      <p>This is a public log of my investing journey. I'm documenting my research, process, and findings as I build my way as an investor. I believe in learning out loud â if you're on a similar path, I'd love to collaborate, hear your questions, or get your advice. The best ideas come from honest conversation.</p>
+      <p>This is a public log of my investing journey. I'm documenting my research, process, and findings as I build my way as an investor. I believe in learning out loud — if you're on a similar path, I'd love to collaborate, hear your questions, or get your advice. The best ideas come from honest conversation.</p>
     </div>
   </section>
 
@@ -606,7 +606,7 @@
 
   <script>
     // ==========================================
-    // BLOG POSTS â loads from posts.json (published site)
+    // BLOG POSTS — loads from posts.json (published site)
     // with localStorage overlay for local previewing
     // ==========================================
     const STORAGE_KEY = 'blank_blog_posts';
@@ -713,7 +713,7 @@
 
   <script>
     // ==========================================
-    // CONFIGURATION â edit these to change tickers
+    // CONFIGURATION — edit these to change tickers
     // ==========================================
     const PORTFOLIO = [
       { ticker: 'GEHC', name: 'GE HealthCare' },
@@ -865,7 +865,7 @@
     // INIT
     // ==========================================
     async function loadAll() {
-      // Portfolio â fetch individually, filter out failures
+      // Portfolio — fetch individually, filter out failures
       Promise.allSettled(PORTFOLIO.map(p => fetchQuote(p.ticker)))
         .then(results => {
           const quotes = results.filter(r => r.status === 'fulfilled').map(r => r.value);
@@ -897,3 +897,4 @@
 
 </body>
 </html>
+
