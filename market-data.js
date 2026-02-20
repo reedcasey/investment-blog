@@ -95,14 +95,6 @@ function renderPortfolio(quotes) {
   const container = document.getElementById('portfolio-holdings');
   if (!container) return;
 
-  // Simple average change (equal-weight since we don't have share counts on the public site)
-  const avgChange = quotes.reduce((s, q) => s + q.change, 0) / quotes.length;
-  const totalEl = document.getElementById('portfolio-total');
-  if (totalEl) {
-    totalEl.textContent = fmtChange(avgChange) + ' today';
-    totalEl.className = 'portfolio-total ' + cls(avgChange);
-  }
-
   container.innerHTML = quotes.map(q => {
     const nameOverride = PORTFOLIO.find(p => p.ticker === q.ticker)?.name || q.shortName;
     return `
@@ -116,7 +108,7 @@ function renderPortfolio(quotes) {
           <div class="holding-change ${cls(q.change)}">${fmtChange(q.change)}</div>
         </div>
       </div>`;
-  }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString()}</div>`;
+  }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'})}</div>`;
 }
 
 // ==========================================
@@ -133,7 +125,7 @@ function renderWatchlist(quotes) {
         <span class="watch-price">${fmtPrice(q.price)}</span>
         <div class="watch-change ${cls(q.change)}">${fmtChange(q.change)}</div>
       </div>
-    </div>`).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString()}</div>`;
+    </div>`).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'})}</div>`;
 }
 
 // ==========================================
@@ -158,7 +150,7 @@ function renderMarketPulse(quotes) {
           <span class="pulse-change ${cls(q.change)}">${fmtChange(q.change)}</span>
         </div>
       </div>`;
-  }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString()}</div>`;
+  }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'})}</div>`;
 }
 
 // ==========================================
