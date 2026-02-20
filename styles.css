@@ -666,6 +666,8 @@ footer p {
   .newsletter-box h3 { font-size: 1.15rem; }
   .newsletter-box p { font-size: 0.85rem; margin-bottom: 1rem; }
   .beehiiv-form-wrapper { max-width: 100%; }
+  .beehiiv-form-wrapper { max-width: 100%; }
+  .beehiiv-form-wrapper iframe { width: 100% !important; max-width: 100% !important; }
 
   /* About mobile */
   .about { padding: 0 1.25rem 3rem; }
