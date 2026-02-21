@@ -324,7 +324,8 @@ function renderBreakdown(b) {
     var data = b[c.key];
     if (!data) continue;
     var barWidth = Math.min(Math.max(data.score, 0), 100);
-    var barBg = 'linear-gradient(to right, rgba(22,163,74,0.12), rgba(22,163,74,1))';
+    var opacity = (barWidth / 100).toFixed(2);
+    var barBg = 'rgba(22,163,74,' + opacity + ')';
     html +=
       '<div class="breakdown-item">' +
         '<div class="breakdown-header">' +
