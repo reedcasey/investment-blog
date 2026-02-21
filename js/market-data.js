@@ -19,7 +19,6 @@ const INDICES = [
   { ticker: '^GSPC', label: 'S&P 500' },
   { ticker: '^IXIC', label: 'Nasdaq' },
   { ticker: '^TNX',  label: '10Y Treasury' },
-  { ticker: '^VIX',  label: 'VIX' },
   { ticker: 'GC=F',  label: 'Gold' },
 ];
 
