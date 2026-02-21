@@ -8,8 +8,6 @@
 // CONFIGURATION â edit these to change tickers
 // ==========================================
 const PORTFOLIO = [
-  { ticker: 'GEHC', name: 'GE HealthCare' },
-  { ticker: 'ACNT', name: 'Ascent Industries' },
 ];
 const WATCHLIST = [
   { ticker: 'HON' },

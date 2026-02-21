@@ -1,0 +1,11 @@
+# Templates and internal docs (not for the live site)
+newsletter-template.docx
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
