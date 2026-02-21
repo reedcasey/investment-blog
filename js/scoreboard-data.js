@@ -36,8 +36,8 @@ const PICKS = [
     marketCap: 193102992,
     score: 73.8,
     dateAdded: "2026-02-21",
-    priceAtAdd: 65.90,
-    currentPrice: 65.90,
+    priceAtAdd: 65.91,
+    currentPrice: 65.91,
   },
   {
     company: "Virco Mfg Corporation",
@@ -54,8 +54,8 @@ const PICKS = [
     marketCap: 164377984,
     score: 72.4,
     dateAdded: "2026-02-21",
-    priceAtAdd: 18.50,
-    currentPrice: 18.50,
+    priceAtAdd: 19.20,
+    currentPrice: 19.20,
   },
   {
     company: "FONAR Corp",
@@ -81,8 +81,8 @@ const PICKS = [
     marketCap: 92191672,
     score: 66.2,
     dateAdded: "2026-02-21",
-    priceAtAdd: 1.03,
-    currentPrice: 1.03,
+    priceAtAdd: 1.04,
+    currentPrice: 1.04,
   },
   {
     company: "Lifevantage Corp",
@@ -108,8 +108,8 @@ const PICKS = [
     marketCap: 101255656,
     score: 64.3,
     dateAdded: "2026-02-21",
-    priceAtAdd: 38.85,
-    currentPrice: 38.85,
+    priceAtAdd: 39.85,
+    currentPrice: 39.85,
   },
 ];
 
