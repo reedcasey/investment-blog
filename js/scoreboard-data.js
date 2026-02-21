@@ -29,6 +29,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 58.05,
     currentPrice: 58.05,
+    breakdown: {
+      value:    { score: 78, note: "P/E of 12.4x with consistent earnings; trades near book value" },
+      quality:  { score: 74, note: "Defense/power electronics niche with 15%+ ROIC and stable margins" },
+      strength: { score: 72, note: "No long-term debt, current ratio above 3.0" },
+      insider:  { score: 62, note: "Modest insider purchases in Q4; management holds meaningful equity" },
+    },
   },
   {
     company: "M-tron Industries, Inc.",
@@ -38,6 +44,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 65.91,
     currentPrice: 65.91,
+    breakdown: {
+      value:    { score: 71, note: "Reasonable valuation at ~14x earnings for a specialty electronics maker" },
+      quality:  { score: 79, note: "High-reliability frequency control products; 20%+ operating margins" },
+      strength: { score: 73, note: "Clean balance sheet with minimal leverage and strong cash position" },
+      insider:  { score: 65, note: "Directors added shares over the past two quarters" },
+    },
   },
   {
     company: "Virco Mfg Corporation",
@@ -47,6 +59,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 6.18,
     currentPrice: 6.18,
+    breakdown: {
+      value:    { score: 85, note: "Deeply discounted at ~5x earnings; well below tangible book value" },
+      quality:  { score: 65, note: "Dominant in K-12 furniture; margins cyclical but improving" },
+      strength: { score: 70, note: "Manageable debt load, positive free cash flow generation" },
+      insider:  { score: 68, note: "CEO and CFO both bought shares on the open market recently" },
+    },
   },
   {
     company: "Core Molding Technologies Inc",
@@ -56,6 +74,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 19.20,
     currentPrice: 19.20,
+    breakdown: {
+      value:    { score: 80, note: "Trades at ~8x earnings; significant discount to replacement value" },
+      quality:  { score: 72, note: "Structural composites for truck/industrial; improving margin profile" },
+      strength: { score: 66, note: "Moderate leverage but strong cash generation covers obligations" },
+      insider:  { score: 58, note: "No recent insider sales; board holds steady positions" },
+    },
   },
   {
     company: "FONAR Corp",
@@ -65,6 +89,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 18.60,
     currentPrice: 18.60,
+    breakdown: {
+      value:    { score: 75, note: "MRI pioneer trading at ~10x earnings with hidden asset value" },
+      quality:  { score: 68, note: "Recurring management fee revenue from stand-up MRI centers" },
+      strength: { score: 70, note: "Net cash position with no meaningful debt" },
+      insider:  { score: 50, note: "Founder holds controlling stake; limited open-market activity" },
+    },
   },
   {
     company: "Alpha Pro Tech Ltd",
@@ -74,6 +104,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 5.15,
     currentPrice: 5.15,
+    breakdown: {
+      value:    { score: 76, note: "Trades below book value; low P/E relative to building products peers" },
+      quality:  { score: 60, note: "PPE and building supply products; margins normalizing post-pandemic" },
+      strength: { score: 72, note: "Zero debt, significant cash on balance sheet" },
+      insider:  { score: 48, note: "No notable recent insider transactions" },
+    },
   },
   {
     company: "CBAK Energy Technology, Inc.",
@@ -83,6 +119,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 1.04,
     currentPrice: 1.04,
+    breakdown: {
+      value:    { score: 82, note: "Extremely low price-to-sales; deep value on asset basis" },
+      quality:  { score: 52, note: "Lithium battery maker; revenue growing but margins still thin" },
+      strength: { score: 58, note: "Working capital position improving but still building reserves" },
+      insider:  { score: 65, note: "Management increased holdings through private placements" },
+    },
   },
   {
     company: "Lifevantage Corp",
@@ -92,6 +134,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 4.85,
     currentPrice: 4.85,
+    breakdown: {
+      value:    { score: 74, note: "Low multiple on steady revenue; priced for no growth" },
+      quality:  { score: 62, note: "Health supplement MLM; high gross margins but channel-dependent" },
+      strength: { score: 65, note: "Low debt, consistent cash generation despite flat top line" },
+      insider:  { score: 48, note: "Limited insider buying; new CEO still building position" },
+    },
   },
   {
     company: "LIVE Ventures Inc",
@@ -101,6 +149,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 17.34,
     currentPrice: 17.34,
+    breakdown: {
+      value:    { score: 78, note: "Trades at deep discount to sum-of-parts across diversified holdings" },
+      quality:  { score: 55, note: "Holding company with flooring, entertainment, and manufacturing assets" },
+      strength: { score: 56, note: "Higher leverage from acquisitions; cash flow covers debt service" },
+      insider:  { score: 62, note: "CEO holds large stake and has been a consistent buyer" },
+    },
   },
   {
     company: "NCS Multistage Holdings, Inc.",
@@ -110,6 +164,12 @@ const PICKS = [
     dateAdded: "2026-02-21",
     priceAtAdd: 39.85,
     currentPrice: 39.85,
+    breakdown: {
+      value:    { score: 70, note: "Moderate P/E for oilfield services; valuation tied to energy cycle" },
+      quality:  { score: 64, note: "Completion tools specialist with good market position but cyclical" },
+      strength: { score: 62, note: "Clean balance sheet for the sector; manageable capex needs" },
+      insider:  { score: 52, note: "Board members hold steady positions; no recent cluster buying" },
+    },
   },
 ];
 
@@ -211,11 +271,14 @@ function renderScoreboard() {
     var retSign = ret > 0 ? "+" : "";
     var months = monthsBetween(pick.dateAdded);
 
+    // Main data row
     var row = document.createElement("tr");
     row.setAttribute("data-ticker", pick.ticker);
+    row.className = "scoreboard-row";
+    row.style.cursor = "pointer";
     row.innerHTML =
       '<td class="col-rank">' + (i + 1) + '</td>' +
-      '<td class="col-company">' + pick.company + '</td>' +
+      '<td class="col-company">' + pick.company + ' <span class="expand-hint">&#9662;</span></td>' +
       '<td class="col-ticker"><strong>' + pick.ticker + '</strong></td>' +
       '<td class="col-mcap">' + formatMarketCap(pick.marketCap) + '</td>' +
       '<td class="col-score">' + pick.score.toFixed(1) + '</td>' +
@@ -224,6 +287,79 @@ function renderScoreboard() {
       '<td class="col-return ' + retClass + '">' + retSign + ret.toFixed(1) + '%</td>';
 
     tbody.appendChild(row);
+
+    // Breakdown dropdown row (hidden by default)
+    if (pick.breakdown) {
+      var dropRow = document.createElement("tr");
+      dropRow.className = "breakdown-row";
+      dropRow.setAttribute("data-ticker-breakdown", pick.ticker);
+
+      var cell = document.createElement("td");
+      cell.setAttribute("colspan", "8");
+      cell.innerHTML = renderBreakdown(pick.breakdown);
+      dropRow.appendChild(cell);
+      tbody.appendChild(dropRow);
+
+      // Click handler to toggle
+      (function(ticker) {
+        row.addEventListener("click", function() {
+          toggleBreakdown(ticker);
+        });
+      })(pick.ticker);
+    }
+  }
+}
+
+function renderBreakdown(b) {
+  var components = [
+    { key: "value",    label: "Value",              color: "#2563eb" },
+    { key: "quality",  label: "Quality",            color: "#16a34a" },
+    { key: "strength", label: "Financial Strength", color: "#9333ea" },
+    { key: "insider",  label: "Insider Activity",   color: "#ea580c" },
+  ];
+
+  var html = '<div class="breakdown-panel">';
+  for (var i = 0; i < components.length; i++) {
+    var c = components[i];
+    var data = b[c.key];
+    if (!data) continue;
+    var barWidth = Math.min(Math.max(data.score, 0), 100);
+    html +=
+      '<div class="breakdown-item">' +
+        '<div class="breakdown-header">' +
+          '<span class="breakdown-label">' + c.label + '</span>' +
+          '<span class="breakdown-score">' + data.score + '/100</span>' +
+        '</div>' +
+        '<div class="breakdown-bar-track">' +
+          '<div class="breakdown-bar-fill" style="width:' + barWidth + '%;background:' + c.color + '"></div>' +
+        '</div>' +
+        '<div class="breakdown-note">' + data.note + '</div>' +
+      '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function toggleBreakdown(ticker) {
+  var dropRow = document.querySelector('tr[data-ticker-breakdown="' + ticker + '"]');
+  var mainRow = document.querySelector('tr[data-ticker="' + ticker + '"]');
+  if (!dropRow || !mainRow) return;
+
+  var isOpen = dropRow.classList.contains("open");
+  // Close all others first
+  var allOpen = document.querySelectorAll(".breakdown-row.open");
+  for (var i = 0; i < allOpen.length; i++) {
+    allOpen[i].classList.remove("open");
+  }
+  var allExpanded = document.querySelectorAll(".scoreboard-row.expanded");
+  for (var j = 0; j < allExpanded.length; j++) {
+    allExpanded[j].classList.remove("expanded");
+  }
+
+  // Toggle this one
+  if (!isOpen) {
+    dropRow.classList.add("open");
+    mainRow.classList.add("expanded");
   }
 }
 

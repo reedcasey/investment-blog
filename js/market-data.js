@@ -1,14 +1,12 @@
 /* ==========================================
-   Allegory of the Trade â Market Data Engine
+   Allegory of the Trade - Market Data Engine
    Handles live stock quotes via Cloudflare
    Worker proxy with CORS proxy fallbacks.
    ========================================== */
 
 // ==========================================
-// CONFIGURATION â edit these to change tickers
+// CONFIGURATION - edit these to change tickers
 // ==========================================
-const PORTFOLIO = [
-];
 const WATCHLIST = [
   { ticker: 'HON' },
   { ticker: 'SOLS' },
@@ -48,7 +46,7 @@ async function fetchQuote(ticker) {
     } catch {}
   }
 
-  // Fallback: CORS proxies â Yahoo Finance
+  // Fallback: CORS proxies -> Yahoo Finance
   const yfUrl = `${YF_BASE}${encodeURIComponent(ticker)}?interval=1d&range=5d`;
   let lastError;
   for (const makeProxy of PROXIES) {
@@ -84,29 +82,6 @@ function fmtChange(c) {
   return sign + c.toFixed(2) + '%';
 }
 function cls(c) { return c >= 0 ? 'up' : 'down'; }
-
-// ==========================================
-// RENDER: PORTFOLIO
-// ==========================================
-function renderPortfolio(quotes) {
-  const container = document.getElementById('portfolio-holdings');
-  if (!container) return;
-
-  container.innerHTML = quotes.map(q => {
-    const nameOverride = PORTFOLIO.find(p => p.ticker === q.ticker)?.name || q.shortName;
-    return `
-      <div class="holding">
-        <div class="holding-left">
-          <span class="holding-ticker">${q.ticker}</span>
-          <span class="holding-name">${nameOverride}</span>
-        </div>
-        <div class="holding-right">
-          <div class="holding-value">${fmtPrice(q.price)}</div>
-          <div class="holding-change ${cls(q.change)}">${fmtChange(q.change)}</div>
-        </div>
-      </div>`;
-  }).join('') + `<div class="last-updated">Updated ${new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'})}</div>`;
-}
 
 // ==========================================
 // RENDER: WATCHLIST
@@ -162,14 +137,6 @@ function showError(containerId, msg) {
 // LOAD ALL MARKET DATA
 // ==========================================
 async function loadAllMarketData() {
-  // Portfolio â fetch individually, filter out failures
-  Promise.allSettled(PORTFOLIO.map(p => fetchQuote(p.ticker)))
-    .then(results => {
-      const quotes = results.filter(r => r.status === 'fulfilled').map(r => r.value);
-      if (quotes.length > 0) renderPortfolio(quotes);
-      else showError('portfolio-holdings', 'Could not load portfolio data');
-    });
-
   // Watchlist
   Promise.allSettled(WATCHLIST.map(w => fetchQuote(w.ticker)))
     .then(results => {
@@ -188,11 +155,11 @@ async function loadAllMarketData() {
 }
 
 // ==========================================
-// INIT â load on page ready, refresh every 60s
+// INIT - load on page ready, refresh every 60s
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   // Only load market data if the sidebar elements exist (i.e., we're on index.html)
-  if (document.getElementById('portfolio-holdings')) {
+  if (document.getElementById('watchlist-holdings')) {
     loadAllMarketData();
     setInterval(loadAllMarketData, 60000);
   }
