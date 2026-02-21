@@ -312,10 +312,10 @@ function renderScoreboard() {
 
 function renderBreakdown(b) {
   var components = [
-    { key: "value",    label: "Value",              color: "#2563eb" },
-    { key: "quality",  label: "Quality",            color: "#16a34a" },
-    { key: "strength", label: "Financial Strength", color: "#9333ea" },
-    { key: "insider",  label: "Insider Activity",   color: "#ea580c" },
+    { key: "value",    label: "Value" },
+    { key: "quality",  label: "Quality" },
+    { key: "strength", label: "Financial Strength" },
+    { key: "insider",  label: "Insider Activity" },
   ];
 
   var html = '<div class="breakdown-panel">';
@@ -324,6 +324,7 @@ function renderBreakdown(b) {
     var data = b[c.key];
     if (!data) continue;
     var barWidth = Math.min(Math.max(data.score, 0), 100);
+    var barBg = 'linear-gradient(to right, rgba(22,163,74,0.12), rgba(22,163,74,1))';
     html +=
       '<div class="breakdown-item">' +
         '<div class="breakdown-header">' +
@@ -331,7 +332,7 @@ function renderBreakdown(b) {
           '<span class="breakdown-score">' + data.score + '/100</span>' +
         '</div>' +
         '<div class="breakdown-bar-track">' +
-          '<div class="breakdown-bar-fill" style="width:' + barWidth + '%;background:' + c.color + '"></div>' +
+          '<div class="breakdown-bar-fill" style="width:' + barWidth + '%;background:' + barBg + '"></div>' +
         '</div>' +
         '<div class="breakdown-note">' + data.note + '</div>' +
       '</div>';
