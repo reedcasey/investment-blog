@@ -157,7 +157,9 @@ nav {
   gap: 0.75rem;
   margin-bottom: 0.6rem;
 }
-.post-tag {
+.post-tag,
+.full-post-tag {
+  display: inline-block;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -166,6 +168,9 @@ nav {
   background: var(--border);
   padding: 0.2rem 0.6rem;
   border-radius: 3px;
+}
+.full-post-tag {
+  margin-bottom: 0.75rem;
 }
 .post-date {
   font-size: 0.8rem;
@@ -364,18 +369,6 @@ nav {
   transition: color 0.2s;
 }
 .full-post-back:hover { color: var(--text); }
-.full-post-tag {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-light);
-  background: var(--border);
-  padding: 0.2rem 0.6rem;
-  border-radius: 3px;
-  margin-bottom: 0.75rem;
-}
 .full-post-title {
   font-family: 'Lora', serif;
   font-size: 2.2rem;
@@ -665,7 +658,6 @@ footer p {
   .newsletter-box { padding: 2rem 1.25rem; }
   .newsletter-box h3 { font-size: 1.15rem; }
   .newsletter-box p { font-size: 0.85rem; margin-bottom: 1rem; }
-  .beehiiv-form-wrapper { max-width: 100%; }
   .beehiiv-form-wrapper { max-width: 100%; }
   .beehiiv-form-wrapper iframe { width: 100% !important; max-width: 100% !important; }
 
