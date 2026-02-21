@@ -4,14 +4,15 @@
 
    To update the list:
    1. Edit the PICKS array below
-   2. Each pick needs: company, ticker, marketCap, score, dateAdded, priceAtAdd, currentPrice
-   3. Returns and months are calculated automatically
-   4. Rank is determined by array order (index + 1)
+   2. Each pick needs: company, ticker, marketCap, score, dateAdded, priceAtAdd
+   3. currentPrice is fetched live — the hardcoded value is used as a fallback
+   4. Returns and months are calculated automatically
+   5. Rank is determined by array order (index + 1)
 
    marketCap format: number in dollars (will be formatted to "$XXM")
    score: composite score from the screener (0-100)
-   priceAtAdd: closing price on the date of inclusion
-   currentPrice: latest known price (update regularly or replace with live feed later)
+   priceAtAdd: closing price on the date of inclusion (frozen, never changes)
+   currentPrice: fallback price if live fetch fails
 */
 
 const SCOREBOARD_CONFIG = {
@@ -114,8 +115,53 @@ const PICKS = [
 
 
 /* ==========================================
-   RENDERING — don't edit below unless
-   changing the table structure
+   LIVE QUOTE FETCHING
+   Uses the same Cloudflare Worker + CORS
+   proxy fallback strategy as market-data.js
+   ========================================== */
+
+const SB_WORKER_URLS = [
+  'https://api.allegoryofthetrade.com/?ticker=',
+  'https://stock-proxy.reedmcasey.workers.dev/?ticker=',
+];
+const SB_YF_BASE = 'https://query1.finance.yahoo.com/v8/finance/chart/';
+const SB_PROXIES = [
+  function(url) { return 'https://corsproxy.io/?' + encodeURIComponent(url); },
+  function(url) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url); },
+  function(url) { return 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url); },
+];
+
+async function sbFetchQuote(ticker) {
+  // Try Cloudflare Worker endpoints first
+  for (var i = 0; i < SB_WORKER_URLS.length; i++) {
+    try {
+      var res = await fetch(SB_WORKER_URLS[i] + encodeURIComponent(ticker), { signal: AbortSignal.timeout(6000) });
+      if (res.ok) {
+        var data = await res.json();
+        if (data.price !== undefined) return data.price;
+      }
+    } catch (e) {}
+  }
+
+  // Fallback: CORS proxies -> Yahoo Finance
+  var yfUrl = SB_YF_BASE + encodeURIComponent(ticker) + '?interval=1d&range=5d';
+  for (var j = 0; j < SB_PROXIES.length; j++) {
+    try {
+      var proxyUrl = SB_PROXIES[j](yfUrl);
+      var res2 = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
+      if (!res2.ok) continue;
+      var data2 = await res2.json();
+      return data2.chart.result[0].meta.regularMarketPrice;
+    } catch (e) {}
+  }
+
+  // All sources failed — return null so we use the fallback price
+  return null;
+}
+
+
+/* ==========================================
+   RENDERING
    ========================================== */
 
 function formatMarketCap(val) {
@@ -166,6 +212,7 @@ function renderScoreboard() {
     var months = monthsBetween(pick.dateAdded);
 
     var row = document.createElement("tr");
+    row.setAttribute("data-ticker", pick.ticker);
     row.innerHTML =
       '<td class="col-rank">' + (i + 1) + '</td>' +
       '<td class="col-company">' + pick.company + '</td>' +
@@ -180,4 +227,72 @@ function renderScoreboard() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", renderScoreboard);
+
+/* ==========================================
+   LIVE UPDATE — fetch quotes and update
+   the return column in place
+   ========================================== */
+
+async function updateLivePrices() {
+  var results = await Promise.allSettled(
+    PICKS.map(function(pick) { return sbFetchQuote(pick.ticker); })
+  );
+
+  var tbody = document.getElementById("scoreboard-body");
+  if (!tbody) return;
+
+  var anyUpdated = false;
+
+  for (var i = 0; i < PICKS.length; i++) {
+    var result = results[i];
+    if (result.status === "fulfilled" && result.value !== null) {
+      var livePrice = result.value;
+      PICKS[i].currentPrice = livePrice;
+      anyUpdated = true;
+
+      // Update the return cell in the existing row
+      var row = tbody.querySelector('tr[data-ticker="' + PICKS[i].ticker + '"]');
+      if (row) {
+        var ret = calcReturn(PICKS[i].priceAtAdd, livePrice);
+        var retClass = ret > 0 ? "up" : ret < 0 ? "down" : "";
+        var retSign = ret > 0 ? "+" : "";
+        var returnCell = row.querySelector(".col-return");
+        if (returnCell) {
+          returnCell.className = "col-return " + retClass;
+          returnCell.textContent = retSign + ret.toFixed(1) + "%";
+        }
+      }
+    }
+  }
+
+  // Show last updated timestamp if any quotes came through
+  if (anyUpdated) {
+    var footer = document.querySelector(".scoreboard-footer-note");
+    if (footer) {
+      var existingTs = document.getElementById("scoreboard-updated");
+      var time = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      if (existingTs) {
+        existingTs.textContent = "Prices updated " + time;
+      } else {
+        var ts = document.createElement("p");
+        ts.id = "scoreboard-updated";
+        ts.style.cssText = "font-size:0.72rem;color:#aaa;margin-top:0.5rem;";
+        ts.textContent = "Prices updated " + time;
+        footer.appendChild(ts);
+      }
+    }
+  }
+}
+
+
+/* ==========================================
+   INIT — render immediately with fallback
+   prices, then fetch live quotes and refresh
+   every 60 seconds
+   ========================================== */
+
+document.addEventListener("DOMContentLoaded", function() {
+  renderScoreboard();
+  updateLivePrices();
+  setInterval(updateLivePrices, 60000);
+});
