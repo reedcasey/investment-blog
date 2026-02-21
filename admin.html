@@ -432,21 +432,32 @@
     }
 
     // ==========================================
-    // INIT -- seed from posts.json if localStorage is empty
+    // INIT -- always merge posts.json into localStorage
+    // so published posts are never lost
     // ==========================================
     (async function init() {
       const existing = getPosts();
-      if (existing.length === 0) {
-        try {
-          const res = await fetch('posts.json');
-          if (res.ok) {
-            const data = await res.json();
-            if (data.length > 0) {
-              savePosts(data);
+      try {
+        const res = await fetch('posts.json');
+        if (res.ok) {
+          const published = await res.json();
+          if (published.length > 0) {
+            // Merge: add any posts from posts.json that aren't already in localStorage
+            const existingIds = new Set(existing.map(p => p.id));
+            const merged = [...existing];
+            let added = 0;
+            for (const post of published) {
+              if (!existingIds.has(post.id)) {
+                merged.push(post);
+                added++;
+              }
+            }
+            if (added > 0 || existing.length === 0) {
+              savePosts(merged);
             }
           }
-        } catch {}
-      }
+        }
+      } catch {}
     })();
   </script>
 
