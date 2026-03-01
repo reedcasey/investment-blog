@@ -1,4 +1,15 @@
 [
+ {
+    "id": "post_1709251200000",
+    "title": "Staying on Task",
+    "tag": "Commentary",
+    "excerpt": "There is always a shiny new toy to catch my eye. Allegory helps me stay focused on the task at hand.",
+    "body": "Staying on task has been the hardest thing to do while learning about investing. There is always a shiny new toy to catch my eye, whether it be a new spin-off, merger, news story, or global economic event. I know I cannot learn everything all at once, but I keep trying to \u2014 that is part of the reason I made this blog. I want to set clear goals and hold myself accountable. If I know people expect to see results from me, I am sure it will help me stay on task. I almost got distracted today with oil prices and the possibility of the Strait of Hormuz being cut off. If I had more extensive knowledge and decades worth of experience, I may have taken action, but Allegory proved useful. I have a task at hand already. If I go off on a tangent I might learn something, but I cannot devote a whole week to it. I know I am not going to act on the news and I would be too late anyway. I will of course continue to keep up with current events and observe how the market reacts, but I already have a task at hand.\n\nThe new microcap list will come out tomorrow as March begins. I remind you, those that stay on the list will keep their percent change from the previous month. As far as the full analyst briefs go, I am still working on the automated system. There have been a few hiccups, so I am working on how to mesh my AI tools with Python scripts that pull data from the SEC's website. The biggest problem I have faced with the AI tools is that they need a hard-stop factual baseline. When pulling from SEC filings, they can mix up different data points if the API defines figures with different names \u2014 for instance earnings can be named, \"Last Twelve Months Earnings From Sector X\" as opposed to \"TTM.\", or anything in between. Each filer has a different classification that can confuse the system. Right now I am working to automate a hard-stop reference point. Once I can pin that down, I believe I will be able to provide error-free coverages to you.\n\nAs for my role in the project, to continue building my fundamental skills I will be picking a company from the new top 10 ranking to do a deep dive on for you all. I will forecast the company and do my own writeup separate from the AI and Python writeups I am working on. This will be published when done or by the end of the month. I do not know how long it will take, as the last writeup I did was mostly a learning process so it took longer. I look forward to continuing to document my progress and interacting as this site grows.",
+    "status": "published",
+    "createdAt": "2026-03-01T00:00:00.000Z",
+    "updatedAt": "2026-03-01T00:00:00.000Z"
+  },
+
   {
     "id": "post_1771644374954",
     "title": "Welcome to Alleogry",
@@ -8,15 +19,5 @@
     "status": "published",
     "createdAt": "2026-02-21T03:26:14.953Z",
     "updatedAt": "2026-02-21T03:26:14.953Z"
-  },
-  {
-    "id": "post_1709251200000",
-    "title": "Staying on Task",
-    "tag": "Commentary",
-    "excerpt": "There is always a shiny new toy to catch my eye. Allegory helps me stay focused on the task at hand.",
-    "body": "Staying on task has been the hardest thing to do while learning about investing. There is always a shiny new toy to catch my eye, whether it be a new spin-off, merger, news story, or global economic event. I know I cannot learn everything all at once, but I keep trying to \u2014 that is part of the reason I made this blog. I want to set clear goals and hold myself accountable. If I know people expect to see results from me, I am sure it will help me stay on task. I almost got distracted today with oil prices and the possibility of the Strait of Hormuz being cut off. If I had more extensive knowledge and decades worth of experience, I may have taken action, but Allegory proved useful. I have a task at hand already. If I go off on a tangent I might learn something, but I cannot devote a whole week to it. I know I am not going to act on the news and I would be too late anyway. I will of course continue to keep up with current events and observe how the market reacts, but I already have a task at hand.\n\nThe new microcap list will come out tomorrow as March begins. I remind you, those that stay on the list will keep their percent change from the previous month. As far as the full analyst briefs go, I am still working on the automated system. There have been a few hiccups, so I am working on how to mesh my AI tools with Python scripts that pull data from the SEC's website. The biggest problem I have faced with the AI tools is that they need a hard-stop factual baseline. When pulling from SEC filings, they can mix up different data points if the API defines figures with different names \u2014 for instance earnings can be named, \"Last Twelve Months Earnings From Sector X\" as opposed to \"TTM.\", or anything in between. Each filer has a different classification that can confuse the system. Right now I am working to automate a hard-stop reference point. Once I can pin that down, I believe I will be able to provide error-free coverages to you.\n\nAs for my role in the project, to continue building my fundamental skills I will be picking a company from the new top 10 ranking to do a deep dive on for you all. I will forecast the company and do my own writeup separate from the AI and Python writeups I am working on. This will be published when done or by the end of the month. I do not know how long it will take, as the last writeup I did was mostly a learning process so it took longer. I look forward to continuing to document my progress and interacting as this site grows.",
-    "status": "published",
-    "createdAt": "2026-03-01T00:00:00.000Z",
-    "updatedAt": "2026-03-01T00:00:00.000Z"
   }
 ]
