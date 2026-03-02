@@ -56,8 +56,8 @@ const PICKS = [
     ticker: "CCLD",
     marketCap: 103872752,
     score: 70.8,
-    dateAdded: "2026-02-21",
-    priceAtAdd: 2.41,
+    dateAdded: "2026-03-02",
+    priceAtAdd: 2.52,
     currentPrice: 2.52,
     breakdown: {
       value:    { score: 86, note: "Deep value at low EV/EBITDA with exceptional FCF yield; top valuation tier" },
@@ -71,8 +71,8 @@ const PICKS = [
     ticker: "OPXS",
     marketCap: 89838784,
     score: 70.3,
-    dateAdded: "2026-02-21",
-    priceAtAdd: 11.84,
+    dateAdded: "2026-03-02",
+    priceAtAdd: 12.95,
     currentPrice: 12.95,
     breakdown: {
       value:    { score: 100, note: "Perfect valuation score; premium P/B offset by strong FCF yield metrics" },
@@ -86,8 +86,8 @@ const PICKS = [
     ticker: "FLXS",
     marketCap: 275133472,
     score: 69.0,
-    dateAdded: "2026-02-21",
-    priceAtAdd: 53.33,
+    dateAdded: "2026-03-02",
+    priceAtAdd: 36.11,
     currentPrice: 36.11,
     breakdown: {
       value:    { score: 100, note: "Near-perfect valuation; P/B 1.6x with strong FCF yield at current depressed price" },
@@ -146,8 +146,8 @@ const PICKS = [
     ticker: "SIF",
     marketCap: 86949640,
     score: 62.5,
-    dateAdded: "2026-02-21",
-    priceAtAdd: 12.56,
+    dateAdded: "2026-03-02",
+    priceAtAdd: 13.15,
     currentPrice: 13.15,
     breakdown: {
       value:    { score: 85, note: "Moderate EV/EBITDA offset by strong FCF yield; solid valuation score" },
